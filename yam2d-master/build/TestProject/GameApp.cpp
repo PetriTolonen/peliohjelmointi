@@ -3,7 +3,7 @@
 // Update game
 bool GameApp::update(ESContext* ctx, float deltaTime)
 {
-
+	m_currentState->update(ctx, deltaTime);
 }
 
 
@@ -15,6 +15,8 @@ void GameApp::draw(ESContext *esContext)
 
 	// Clear the color buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+	m_currentState->draw(esContext);
 
 }
 

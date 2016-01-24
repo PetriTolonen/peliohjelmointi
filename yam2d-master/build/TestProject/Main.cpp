@@ -1,6 +1,7 @@
 // Include OpenGL ES Engine utils
 #include <es_util.h>
 #include "GameApp.h"
+#include "SplashScreenState.h"
 
 using namespace yam2d;
 
@@ -13,13 +14,15 @@ namespace
 bool init(ESContext *esContext)
 {
 	GameApp* game = new GameApp();
+	SplashScreenState* splash = new SplashScreenState();
+	game->setState(splash);
 	return true;
 }
 
 // Deinitialize the game
 void deinit(ESContext *esContext)
 {
-
+	game->~GameApp();
 }
 
 int main(int argc, char *argv[])
