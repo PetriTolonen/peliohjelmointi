@@ -7,7 +7,7 @@ using namespace yam2d;
 class SplashScreenState : public GameState
 {
 public:
-	SplashScreenState(){}
+	SplashScreenState();
 	virtual ~SplashScreenState(){}
 	virtual bool update(ESContext* ctx, float deltaTime);
 	virtual void draw(ESContext* ctx);

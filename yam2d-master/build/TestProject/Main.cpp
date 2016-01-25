@@ -8,13 +8,14 @@ using namespace yam2d;
 namespace
 {
 	GameApp* game;
+	SplashScreenState* splash;
 }
 
 // Initialize the game
 bool init(ESContext *esContext)
 {
-	GameApp* game = new GameApp();
-	SplashScreenState* splash = new SplashScreenState();
+	game = new GameApp();
+	splash = new SplashScreenState();
 	game->setState(splash);
 	return true;
 }
@@ -29,6 +30,11 @@ void deinit(ESContext *esContext)
 void update(ESContext* ctx, float deltaTime)
 {
 	game->update(ctx, deltaTime);
+
+	if (false)
+	{
+		esQuitApp(ctx);
+	}
 }
 
 

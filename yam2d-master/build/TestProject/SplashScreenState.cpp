@@ -1,5 +1,10 @@
 #include "SplashScreenState.h"
 #include <iostream>
+#include <SpriteComponent.h>
+
+SplashScreenState::SplashScreenState()
+{
+}
 
 bool SplashScreenState::update(ESContext* ctx, float deltaTime)
 {
@@ -8,5 +13,5 @@ bool SplashScreenState::update(ESContext* ctx, float deltaTime)
 
 void SplashScreenState::draw(ESContext* ctx)
 {
-	std::cout << "testing splash" << std::endl;
+	
 }
