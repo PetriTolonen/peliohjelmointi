@@ -9,8 +9,8 @@ class SplashScreenState : public GameState
 public:
 	SplashScreenState(){}
 	virtual ~SplashScreenState(){}
-	virtual bool update(ESContext*, float deltaTime){}
-	virtual void draw(ESContext*){}
+	virtual bool update(ESContext* ctx, float deltaTime);
+	virtual void draw(ESContext* ctx);
 private:
 	Ref<Sprite> m_sprite;
 };

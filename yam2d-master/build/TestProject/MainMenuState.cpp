@@ -1,11 +1,11 @@
 #include "MainMenuState.h"
 
-bool MainMenuState::update(ESContext*, float deltaTime)
+bool MainMenuState::update(ESContext* ctx, float deltaTime)
 {
-
+	return true;
 }
 
-void MainMenuState::draw(ESContext*)
+void MainMenuState::draw(ESContext* ctx)
 {
 
 }

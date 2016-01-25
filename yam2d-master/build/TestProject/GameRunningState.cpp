@@ -1,11 +1,11 @@
 #include "GameRunningState.h"
 
-bool GameRunningState::update(ESContext*, float deltaTime)
+bool GameRunningState::update(ESContext* ctx, float deltaTime)
 {
-
+	return true;
 }
 
-void GameRunningState::draw(ESContext*)
+void GameRunningState::draw(ESContext* ctx)
 {
 
 }

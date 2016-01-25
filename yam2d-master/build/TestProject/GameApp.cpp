@@ -4,19 +4,13 @@
 bool GameApp::update(ESContext* ctx, float deltaTime)
 {
 	m_currentState->update(ctx, deltaTime);
+	return true;
 }
 
 
 // Draw game
-void GameApp::draw(ESContext *esContext)
+void GameApp::draw(ESContext *ctx)
 {
-	// Set OpenGL clear color (dark gray)
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-
-	// Clear the color buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-
-	m_currentState->draw(esContext);
-
+	m_currentState->draw(ctx);
 }
 

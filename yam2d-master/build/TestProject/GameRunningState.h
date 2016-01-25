@@ -7,8 +7,8 @@ class GameRunningState : public GameState
 {
 	GameRunningState(){}
 	virtual ~GameRunningState(){}
-	virtual bool update(ESContext*, float deltaTime){}
-	virtual void draw(ESContext*){}
+	virtual bool update(ESContext* ctx, float deltaTime);
+	virtual void draw(ESContext* ctx);
 private:
 	Ref<Map> m_map;
 };

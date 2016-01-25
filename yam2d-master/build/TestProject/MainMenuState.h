@@ -9,8 +9,8 @@ class MainMenuState : public GameState
 public:
 	MainMenuState(){}
 	virtual ~MainMenuState(){}
-	virtual bool update(ESContext*, float deltaTime){}
-	virtual void draw(ESContext*){}
+	virtual bool update(ESContext* ctx, float deltaTime);
+	virtual void draw(ESContext* ctx);
 private:
 	Ref<Map> m_map;
 };

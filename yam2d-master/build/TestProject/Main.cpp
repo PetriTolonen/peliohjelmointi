@@ -25,6 +25,19 @@ void deinit(ESContext *esContext)
 	game->~GameApp();
 }
 
+// Update game
+void update(ESContext* ctx, float deltaTime)
+{
+	game->update(ctx, deltaTime);
+}
+
+
+// Draw game
+void draw(ESContext *esContext)
+{
+	game->draw(esContext);
+}
+
 int main(int argc, char *argv[])
 {
 	ESContext esContext;
@@ -32,8 +45,8 @@ int main(int argc, char *argv[])
 	esCreateWindow(&esContext, "Simple map example", 1280, 720, ES_WINDOW_DEFAULT);
 
 	esRegisterInitFunc(&esContext, init);
-	esRegisterDrawFunc(&esContext, game->draw);
-	esRegisterUpdateFunc(&esContext, game->update);
+	esRegisterDrawFunc(&esContext, draw);
+	esRegisterUpdateFunc(&esContext, update);
 	esRegisterDeinitFunc(&esContext, deinit);
 
 	esMainLoop(&esContext);
