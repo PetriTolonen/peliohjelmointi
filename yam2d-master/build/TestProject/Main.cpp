@@ -8,14 +8,13 @@ using namespace yam2d;
 namespace
 {
 	GameApp* game;
-	SplashScreenState* splash;
 }
 
 // Initialize the game
 bool init(ESContext *esContext)
 {
 	game = new GameApp();
-	splash = new SplashScreenState();
+	SplashScreenState* splash = new SplashScreenState();
 	game->setState(splash);
 	return true;
 }
@@ -23,7 +22,8 @@ bool init(ESContext *esContext)
 // Deinitialize the game
 void deinit(ESContext *esContext)
 {
-	game->~GameApp();
+	delete game;
+	//game->~GameApp();
 }
 
 // Update game
