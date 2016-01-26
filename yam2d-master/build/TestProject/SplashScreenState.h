@@ -20,4 +20,7 @@ private:
 	Ref<Text> text;
 
 	float count = 0.0f;
+	float m_timer;
+
+	bool doonce = true;
 };

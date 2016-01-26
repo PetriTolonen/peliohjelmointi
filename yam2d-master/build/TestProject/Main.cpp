@@ -2,6 +2,7 @@
 #include <es_util.h>
 #include "GameApp.h"
 #include "SplashScreenState.h"
+#include "MainMenuState.h"
 
 using namespace yam2d;
 

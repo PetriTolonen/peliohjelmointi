@@ -48,6 +48,7 @@ bool SplashScreenState::update(ESContext* ctx, float deltaTime)
 	//esLogMessage(__FUNCTION__);
 	// Update total time counter.
 	count += deltaTime;
+	m_timer += deltaTime;
 
 	// Set text.
 	text->setText("Splash!!");
@@ -56,10 +57,19 @@ bool SplashScreenState::update(ESContext* ctx, float deltaTime)
 	batch->clear();
 
 	// Add sprite. Rotate it according to total time.
-	batch->addSprite(splashTexture, m_sprite, vec2(0, 0), count, vec2(1));
+	batch->addSprite(splashTexture, m_sprite, vec2(0, 0), count, vec2(500));
 
 	// Add text to position -400,300
 	batch->addText(fontTexture, text, vec2(-ctx->width / 3, ctx->height / 3), 0);
+
+	if (m_timer > 10.0f)
+	{
+		if (doonce)
+		{
+			std::cout << "Testing timer in splash screen" << std::endl;
+			doonce = false;
+		}		
+	}
 
 	return true;
 }
