@@ -23,7 +23,6 @@ bool init(ESContext *esContext)
 void deinit(ESContext *esContext)
 {
 	delete game;
-	//game->~GameApp();
 }
 
 // Update game

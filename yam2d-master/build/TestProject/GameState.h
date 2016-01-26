@@ -1,6 +1,11 @@
 #pragma once
-#include "Object.h"
+#include <Object.h>
 #include <es_util.h>
+#include <Sprite.h>
+#include <SpriteBatch.h>
+#include <SpriteSheet.h>
+#include <Text.h>
+#include <Texture.h>
 
 class GameApp;
 

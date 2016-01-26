@@ -1,11 +1,6 @@
 #pragma once
 
 #include "GameState.h"
-#include "Sprite.h"
-#include "SpriteBatch.h"
-#include "SpriteSheet.h"
-#include <Text.h>
-#include <Texture.h>
 
 using namespace yam2d;
 
@@ -19,7 +14,7 @@ public:
 private:
 	Ref<SpriteBatchGroup> batch;
 	Ref<Sprite> m_sprite;
-	Ref<Texture> texture;
+	Ref<Texture> splashTexture;
 	Ref<SpriteSheet> font;
 	Ref<Texture> fontTexture;
 	Ref<Text> text;
