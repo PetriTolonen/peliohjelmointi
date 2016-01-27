@@ -1,8 +1,10 @@
 #include "SplashScreenState.h"
 #include <iostream>
 #include <SpriteComponent.h>
+#include "GameApp.h"
+#include "MainMenuState.h"
 
-SplashScreenState::SplashScreenState()
+SplashScreenState::SplashScreenState(GameApp* app) : GameState(app)
 {
 	esLogMessage(__FUNCTION__);
 	int cc = 0;
@@ -36,11 +38,6 @@ SplashScreenState::SplashScreenState()
 
 SplashScreenState::~SplashScreenState()
 {
-	esLogMessage(__FUNCTION__);
-	// Delete sprite batch group.
-	delete m_sprite;
-	delete text;
-	delete batch;
 }
 
 bool SplashScreenState::update(ESContext* ctx, float deltaTime)
@@ -62,13 +59,9 @@ bool SplashScreenState::update(ESContext* ctx, float deltaTime)
 	// Add text to position -400,300
 	batch->addText(fontTexture, text, vec2(-ctx->width / 3, ctx->height / 3), 0);
 
-	if (m_timer > 10.0f)
+	if (m_timer > 3.0f)
 	{
-		if (doonce)
-		{
-			std::cout << "Testing timer in splash screen" << std::endl;
-			doonce = false;
-		}		
+		getApp()->setState(new MainMenuState(getApp()));
 	}
 
 	return true;

@@ -14,13 +14,12 @@ using namespace yam2d;
 class GameState : public Object
 {
 public:
-	virtual ~GameState(){}
 	virtual bool update(ESContext* ctx, float deltaTime){ return true; }
 	virtual void draw(ESContext *ctx){}
+	virtual ~GameState(){}
 	
 protected:
-	GameState(){}
-	virtual ~GameState(){}
+	GameState(GameApp* app): m_gameApp(app){}	
 	GameApp* getApp(){ return m_gameApp; }
 private:
 	GameApp* m_gameApp;
