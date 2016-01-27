@@ -13,9 +13,9 @@ class GameApp : public Object
 public:
 	GameApp(){}
 	virtual ~GameApp(){}
-	bool update(ESContext* ctx, float deltaTime){}
-	void draw(ESContext *esContext){}
-	void setState(GameState* setState){ m_currentState = setState; }
+	bool update(ESContext* ctx, float deltaTime);
+	void draw(ESContext * ctx);
+	void setState(GameState* newState){ m_currentState = newState; }
 private:
 	Ref<GameState> m_currentState;
 };

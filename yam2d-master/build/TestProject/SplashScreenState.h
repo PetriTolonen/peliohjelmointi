@@ -1,17 +1,26 @@
 #pragma once
 
 #include "GameState.h"
-#include "Sprite.h"
+
 using namespace yam2d;
 
 class SplashScreenState : public GameState
 {
 public:
-	SplashScreenState(GameApp* app): m_gameApp(app) {}
-	virtual ~SplashScreenState(){}
-	virtual bool update(ESContext*, float deltaTime){}
-	virtual void draw(ESContext*){}
+	SplashScreenState();
+	virtual ~SplashScreenState();
+	virtual bool update(ESContext* ctx, float deltaTime);
+	virtual void draw(ESContext* ctx);
 private:
+	Ref<SpriteBatchGroup> batch;
 	Ref<Sprite> m_sprite;
-	GameApp* m_gameApp;
+	Ref<Texture> splashTexture;
+	Ref<SpriteSheet> font;
+	Ref<Texture> fontTexture;
+	Ref<Text> text;
+
+	float count = 0.0f;
+	float m_timer;
+
+	bool doonce = true;
 };

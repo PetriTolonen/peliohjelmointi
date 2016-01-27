@@ -1,13 +1,25 @@
 #pragma once
-#include "Object.h"
-#include "GameApp.h"
+#include <Object.h>
+#include <es_util.h>
+#include <Sprite.h>
+#include <SpriteBatch.h>
+#include <SpriteSheet.h>
+#include <Text.h>
+#include <Texture.h>
+
+class GameApp;
 
 using namespace yam2d;
 
 class GameState : public Object
 {
 public:
-	GameState(GameApp* app) : m_gameApp(app){}
+	virtual ~GameState(){}
+	virtual bool update(ESContext* ctx, float deltaTime){ return true; }
+	virtual void draw(ESContext *ctx){}
+	
+protected:
+	GameState(){}
 	virtual ~GameState(){}
 	GameApp* getApp(){ return m_gameApp; }
 private:
