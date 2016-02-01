@@ -1,7 +1,10 @@
 #pragma once
 
 #include "GameState.h"
-#include "Map.h"
+#include <Layer.h>
+#include <Map.h>
+#include <Camera.h>
+
 using namespace yam2d;
 
 class MainMenuState : public GameState
