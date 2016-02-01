@@ -1,33 +1,7 @@
 #include "MainMenuState.h"
 
-#include <SpriteComponent.h>
-#include <Input.h>
 #include "GameRunningState.h"
 #include "GameApp.h"
-
-GameObject* createSpriteGameObject(const std::string& bitmapFileName, float sizeX, float sizeY, bool isWhiteTransparentColor = false)
-{
-	// Load texture to be used as texture for sprite.
-	Texture* texture = new Texture(bitmapFileName.c_str());
-
-	// If user wants to create texture which white coros is treated as atransparent color.
-	if (isWhiteTransparentColor)
-	{
-		// Set white to transparent. Here color values are from 0 to 255 (RGB)
-		texture->setTransparentColor(255, 255, 255);
-	}
-
-	// Create new sprite GameObject from texture.
-	GameObject* gameObject = new GameObject(0, 0);
-	SpriteComponent* sprite = new SpriteComponent(gameObject, texture);
-
-	// Resize the sprite to be correct size
-	gameObject->setSize(sizeX, sizeY);
-
-	// Add sprite component to game object
-	gameObject->addComponent(sprite);
-	return gameObject;
-}
 
 MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 {
@@ -54,7 +28,7 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	m_map->addLayer(Map::MAPLAYER0, objectLayer);
 
 	// Create new start game object
-	GameObject* start = createSpriteGameObject("start.png", tileSize.x, tileSize.y);
+	GameObject* start = createSpriteGameObject("StartExit.png", tileSize.x, tileSize.y,0,0,128,128);
 
 	start->setName("start");
 	// Add start to level
@@ -63,7 +37,7 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	start->setPosition(vec2(0, -0.51f));
 
 	// Create new start game object
-	GameObject* exit = createSpriteGameObject("exit.png", tileSize.x, tileSize.y);
+	GameObject* exit = createSpriteGameObject("StartExit.png", tileSize.x, tileSize.y,128,0,128,128);
 
 	exit->setName("exit");
 	// Add exit to level

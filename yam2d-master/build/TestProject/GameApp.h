@@ -1,11 +1,6 @@
 #pragma once
-// Include OpenGL ES Engine utils
-#include <es_util.h>
 
-#include "Object.h"
 #include "GameState.h"
-#include "Ref.h"
-
 using namespace yam2d;
 
 class GameApp : public Object

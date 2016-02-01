@@ -1,8 +1,7 @@
 #include "SplashScreenState.h"
 
-#include <SpriteComponent.h>
-#include "GameApp.h"
 #include "MainMenuState.h"
+#include "GameApp.h"
 
 SplashScreenState::SplashScreenState(GameApp* app) : GameState(app)
 {

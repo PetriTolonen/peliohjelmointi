@@ -1,12 +1,11 @@
 #pragma once
 
 #include "GameState.h"
-#include "Map.h"
 
 class GameRunningState : public GameState
 {
 public:
-	GameRunningState(GameApp* app) : GameState(app){}
+	GameRunningState(GameApp* app);
 	virtual ~GameRunningState(){}
 	virtual bool update(ESContext* ctx, float deltaTime);
 	virtual void draw(ESContext* ctx);

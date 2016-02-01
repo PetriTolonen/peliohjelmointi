@@ -30,11 +30,6 @@ void deinit(ESContext *esContext)
 void update(ESContext* ctx, float deltaTime)
 {
 	game->update(ctx, deltaTime);
-
-	if (false)
-	{
-		esQuitApp(ctx);
-	}
 }
 
 

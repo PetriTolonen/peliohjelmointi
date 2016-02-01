@@ -1,9 +1,6 @@
 #pragma once
 
 #include "GameState.h"
-#include <Layer.h>
-#include <Map.h>
-#include <Camera.h>
 
 using namespace yam2d;
 
