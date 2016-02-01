@@ -1,5 +1,5 @@
 #include "SplashScreenState.h"
-#include <iostream>
+
 #include <SpriteComponent.h>
 #include "GameApp.h"
 #include "MainMenuState.h"

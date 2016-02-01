@@ -2,6 +2,8 @@
 
 #include <SpriteComponent.h>
 #include <Input.h>
+#include "GameRunningState.h"
+#include "GameApp.h"
 
 GameObject* createSpriteGameObject(const std::string& bitmapFileName, float sizeX, float sizeY, bool isWhiteTransparentColor = false)
 {
@@ -53,10 +55,21 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 
 	// Create new start game object
 	GameObject* start = createSpriteGameObject("start.png", tileSize.x, tileSize.y);
+
+	start->setName("start");
 	// Add start to level
 	objectLayer->addGameObject(start);
 	// Set position
-	start->setPosition(vec2(0, 0));
+	start->setPosition(vec2(0, -0.51f));
+
+	// Create new start game object
+	GameObject* exit = createSpriteGameObject("exit.png", tileSize.x, tileSize.y);
+
+	exit->setName("exit");
+	// Add exit to level
+	objectLayer->addGameObject(exit);
+	// Set position
+	exit->setPosition(vec2(0, 0.51f));
 
 	esLogMessage("Init... Done");
 }
@@ -72,30 +85,43 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 	float mouseX = float(getMouseAxisX());
 	float mouseY = float(getMouseAxisY());
 
-	if (isMouseButtonPressed(MOUSE_LEFT))
+	if (isMouseButtonReleased(MOUSE_LEFT))
 	{
-		vec2 mouseInMapCoordinates = m_map->screenToMapCoordinates(mouseX, mouseY);
-		
-		if (isMouseButtonReleased(MOUSE_LEFT))
-		{
-			GameObject* pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
+		mouseWasPressedAndReleased = true;
+	}
 
-			if (pickedObject)
-			{
-				esLogMessage("Object %s picked at position %2.2f,%2.2f!",
-					pickedObject->getName().c_str(),
-					pickedObject->getPosition().x,
-					pickedObject->getPosition().y);
-			}
-			else
-			{
-				esLogMessage("Object not picked!");
-			}
-		}		
-	}	
+	vec2 mouseInMapCoordinates = m_map->screenToMapCoordinates(mouseX, mouseY);
+	
+	if (mouseWasPressedAndReleased == true)
+	{
+		pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
+
+		if (pickedObject && pickedObject->getName() == "start")
+		{
+			esLogMessage("Object %s picked at position %2.2f,%2.2f!",
+				pickedObject->getName().c_str(),
+				pickedObject->getPosition().x,
+				pickedObject->getPosition().y," (start selected)");
+
+			getApp()->setState(new GameRunningState(getApp()));
+			return true;
+		}
+		if (pickedObject && pickedObject->getName() == "exit")
+		{
+			esLogMessage("Object %s picked at position %2.2f,%2.2f!",
+				pickedObject->getName().c_str(),
+				pickedObject->getPosition().x,
+				pickedObject->getPosition().y, " (exit selected)");
+			return false;
+		}
+		else
+		{
+			esLogMessage("Object not picked!");
+		}
+	}
 
 	m_map->update(deltaTime);
-
+	mouseWasPressedAndReleased = false;
 	return true;
 }
 

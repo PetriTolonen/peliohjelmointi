@@ -5,6 +5,7 @@
 
 class GameRunningState : public GameState
 {
+public:
 	GameRunningState(GameApp* app) : GameState(app){}
 	virtual ~GameRunningState(){}
 	virtual bool update(ESContext* ctx, float deltaTime);
