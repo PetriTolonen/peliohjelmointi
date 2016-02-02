@@ -68,26 +68,53 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 	float mouseX = float(getMouseAxisX());
 	float mouseY = float(getMouseAxisY());
 
+	// Mouse picks start or exit.
 	vec2 mouseInMapCoordinates = m_map->screenToMapCoordinates(mouseX, mouseY);
 	pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
 
+	// Changing currentSelection from mouse.
 	if (pickedObject && pickedObject->getName() == "start")
 	{
-		pickedObject->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+		currentSelection = 0;
 	}
 	else if (pickedObject && pickedObject->getName() == "exit")
 	{
-		pickedObject->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
-	}
-	else
-	{
-		for (int i = 0; i < m_map->getLayer("Objects")->getGameObjects().size(); i++)
-		{
-			m_map->getLayer("Objects")->getGameObjects()[i]->getComponent<SpriteComponent>()->getSprite()->setColor(1.0f, 1.0f, 1.0f);
-		}
+		currentSelection = 1;
 	}
 
-	// Mouse selection
+	// Keyboard changes currentSelection up and down.
+	if (isKeyReleased(KEY_UP) || isKeyReleased(KEY_W))
+	{
+
+		if (currentSelection > 0)
+		{
+			currentSelection--;
+		}
+
+		return true;
+	}
+
+	if (isKeyReleased(KEY_DOWN)|| isKeyReleased(KEY_S))
+	{
+
+		if (currentSelection < 1)
+		{
+			currentSelection++;
+		}
+
+		return true;
+	}
+
+	// Clearing color from all selections.
+	for (int i = 0; i < m_map->getLayer("Objects")->getGameObjects().size(); i++)
+	{
+		m_map->getLayer("Objects")->getGameObjects()[i]->getComponent<SpriteComponent>()->getSprite()->setColor(1.0f, 1.0f, 1.0f);
+	}
+
+	// Color current selection.
+	m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+
+	// Mouse selection by pressing left mouse button.
 	if (isMouseButtonReleased(MOUSE_LEFT))
 	{
 		if (pickedObject && pickedObject->getName() == "start")
@@ -95,7 +122,7 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 			esLogMessage("Object %s picked at position %2.2f,%2.2f!",
 				pickedObject->getName().c_str(),
 				pickedObject->getPosition().x,
-				pickedObject->getPosition().y," (start selected with mouse)");
+				pickedObject->getPosition().y, " (start selected with mouse)");
 
 			toRunningState();
 			return true;
@@ -114,33 +141,7 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 		}
 	}
 
-	if (isKeyReleased(KEY_UP) || isKeyReleased(KEY_W))
-	{
-		m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(1.0f, 1.0f, 1.0f);
-
-		if (currentSelection > 0)
-		{
-			currentSelection--;
-		}
-		m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
-
-		return true;
-	}
-
-	if (isKeyReleased(KEY_DOWN)|| isKeyReleased(KEY_S))
-	{
-		m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(1.0f, 1.0f, 1.0f);
-
-		if (currentSelection < 1)
-		{
-			currentSelection++;
-		}
-		m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
-
-		
-		return true;
-	}
-
+	// Keyboard return selectes currentSelection.
 	if (isKeyReleased(KEY_RETURN))
 	{
 		switch (currentSelection)
