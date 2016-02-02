@@ -3,6 +3,11 @@
 #include "GameRunningState.h"
 #include "GameApp.h"
 
+void MainMenuState::toRunningState()
+{
+	getApp()->setState(new GameRunningState(getApp()));
+}
+
 MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 {
 	esLogMessage(__FUNCTION__);
@@ -45,6 +50,10 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	// Set position
 	exit->setPosition(vec2(0, 0.51f));
 
+	currentSelection = 0;
+	m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+
+
 	esLogMessage("Init... Done");
 }
 
@@ -59,25 +68,36 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 	float mouseX = float(getMouseAxisX());
 	float mouseY = float(getMouseAxisY());
 
-	if (isMouseButtonReleased(MOUSE_LEFT))
+	vec2 mouseInMapCoordinates = m_map->screenToMapCoordinates(mouseX, mouseY);
+	pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
+
+	if (pickedObject && pickedObject->getName() == "start")
 	{
-		mouseWasPressedAndReleased = true;
+		pickedObject->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+	}
+	else if (pickedObject && pickedObject->getName() == "exit")
+	{
+		pickedObject->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+	}
+	else
+	{
+		for (int i = 0; i < m_map->getLayer("Objects")->getGameObjects().size(); i++)
+		{
+			m_map->getLayer("Objects")->getGameObjects()[i]->getComponent<SpriteComponent>()->getSprite()->setColor(1.0f, 1.0f, 1.0f);
+		}
 	}
 
-	vec2 mouseInMapCoordinates = m_map->screenToMapCoordinates(mouseX, mouseY);
-	
-	if (mouseWasPressedAndReleased == true)
+	// Mouse selection
+	if (isMouseButtonReleased(MOUSE_LEFT))
 	{
-		pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
-
 		if (pickedObject && pickedObject->getName() == "start")
 		{
 			esLogMessage("Object %s picked at position %2.2f,%2.2f!",
 				pickedObject->getName().c_str(),
 				pickedObject->getPosition().x,
-				pickedObject->getPosition().y," (start selected)");
+				pickedObject->getPosition().y," (start selected with mouse)");
 
-			getApp()->setState(new GameRunningState(getApp()));
+			toRunningState();
 			return true;
 		}
 		if (pickedObject && pickedObject->getName() == "exit")
@@ -85,7 +105,7 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 			esLogMessage("Object %s picked at position %2.2f,%2.2f!",
 				pickedObject->getName().c_str(),
 				pickedObject->getPosition().x,
-				pickedObject->getPosition().y, " (exit selected)");
+				pickedObject->getPosition().y, " (exit selected with mouse)");
 			return false;
 		}
 		else
@@ -94,8 +114,54 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 		}
 	}
 
+	if (isKeyReleased(KEY_UP) || isKeyReleased(KEY_W))
+	{
+		m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(1.0f, 1.0f, 1.0f);
+
+		if (currentSelection > 0)
+		{
+			currentSelection--;
+		}
+		m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+
+		return true;
+	}
+
+	if (isKeyReleased(KEY_DOWN)|| isKeyReleased(KEY_S))
+	{
+		m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(1.0f, 1.0f, 1.0f);
+
+		if (currentSelection < 1)
+		{
+			currentSelection++;
+		}
+		m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+
+		
+		return true;
+	}
+
+	if (isKeyReleased(KEY_RETURN))
+	{
+		switch (currentSelection)
+		{
+		case 0:
+		{
+			toRunningState();
+			break;
+		}
+		case 1:
+		{
+			return false;
+		}		
+
+		default:
+			break;
+		}
+		return true;
+	}
+
 	m_map->update(deltaTime);
-	mouseWasPressedAndReleased = false;
 	return true;
 }
 

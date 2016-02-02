@@ -25,7 +25,7 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 {
 	m_map->update(deltaTime);
 
-	if (isKeyPressed(KEY_ESCAPE))
+	if (isKeyReleased(KEY_ESCAPE))
 	{
 		getApp()->setState(new MainMenuState(getApp()));
 		return true;

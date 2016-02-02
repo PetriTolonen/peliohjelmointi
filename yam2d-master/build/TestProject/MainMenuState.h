@@ -21,7 +21,9 @@ private:
 	Ref<Texture> exitTexture;
 
 	Ref<SpriteBatchGroup> batch;
-	bool mouseWasPressedAndReleased = false;
 
 	Ref<GameObject> pickedObject;
+	void toRunningState();
+
+	int currentSelection;
 };
