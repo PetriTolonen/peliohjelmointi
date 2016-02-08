@@ -22,7 +22,7 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	m_map->addLayer(Map::BACKGROUND0, backgroundLayer);
 
 	// Create new sprite GameObject from texture (background sprite) size is same than screen size.
-	GameObject* backgroundGameObject = createSpriteGameObject("splash.png", 1280.0f, 720.0f);
+	GameObject* backgroundGameObject = createSpriteGameObject("assets/splash.png", 1280.0f, 720.0f);
 
 	backgroundLayer->addGameObject(backgroundGameObject);
 
@@ -33,7 +33,7 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	m_map->addLayer(Map::MAPLAYER0, objectLayer);
 
 	// Create new start game object
-	GameObject* start = createSpriteGameObject("StartExit.png", tileSize.x, tileSize.y,0,0,128,128);
+	GameObject* start = createSpriteGameObject("assets/StartExit.png", tileSize.x, tileSize.y,0,0,128,128);
 
 	start->setName("start");
 	// Add start to level
@@ -42,7 +42,7 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	start->setPosition(vec2(0, -0.51f));
 
 	// Create new start game object
-	GameObject* exit = createSpriteGameObject("StartExit.png", tileSize.x, tileSize.y,128,0,128,128);
+	GameObject* exit = createSpriteGameObject("assets/StartExit.png", tileSize.x, tileSize.y,128,0,128,128);
 
 	exit->setName("exit");
 	// Add exit to level

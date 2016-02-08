@@ -1,6 +1,7 @@
 #include "GameRunningState.h"
 #include "GameApp.h"
 #include "MainMenuState.h"
+#include <iostream>
 
 GameRunningState::GameRunningState(GameApp* app) : GameState(app)
 {
@@ -10,15 +11,18 @@ GameRunningState::GameRunningState(GameApp* app) : GameState(app)
 	//Map Tilesize
 	vec2 tileSize(128, 128);
 
-	m_map = new Map(tileSize.x, tileSize.y);
+	m_map = new TmxMap();
+	componentFactory = new DefaultComponentFactory();
 
-	Layer* backgroundLayer = new Layer(m_map, "Background", 1.0f, true, false);
-	m_map->addLayer(Map::BACKGROUND0, backgroundLayer);
+	m_map->loadMapFile("assets/level.tmx", componentFactory);
 
-	// Create new sprite GameObject from texture (background sprite) size is same than screen size.
-	GameObject* backgroundGameObject = createSpriteGameObject("gamebackround_1080p.png", 1280.0f, 720.0f);
+	// Move camera to middle of map.
+	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f - 0.5f));
+}
 
-	backgroundLayer->addGameObject(backgroundGameObject);
+GameRunningState::~GameRunningState()
+{
+	//std::cout << "Runnig state destructor" << std::endl;
 }
 
 bool GameRunningState::update(ESContext* ctx, float deltaTime)

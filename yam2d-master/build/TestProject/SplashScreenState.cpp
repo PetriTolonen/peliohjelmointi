@@ -14,7 +14,7 @@ SplashScreenState::SplashScreenState(GameApp* app) : GameState(app)
 
 	esLogMessage("Init... %d", cc++);
 	// Load texture to be used as texture for sprite.
-	splashTexture = new Texture("splash.png");
+	splashTexture = new Texture("assets/splash.png");
 
 	esLogMessage("Init... %d", cc++);
 	// Create new sprite, with default parameters.
@@ -22,11 +22,11 @@ SplashScreenState::SplashScreenState(GameApp* app) : GameState(app)
 
 	esLogMessage("Init... %d", cc++);
 	// Load font texture. Made with font creation tool like bitmap font builder.
-	fontTexture = new Texture("Fixedsys_24_Bold.png");
+	fontTexture = new Texture("assets/Fixedsys_24_Bold.png");
 
 	esLogMessage("Init... %d", cc++);
 	// Create font clip areas (sprite sheet), from dat file and texture. Dat-file is made with bitmap font builder.
-	font = SpriteSheet::autoFindFontFromTexture(fontTexture, "Fixedsys_24_Bold.dat");
+	font = SpriteSheet::autoFindFontFromTexture(fontTexture, "assets/Fixedsys_24_Bold.dat");
 
 	esLogMessage("Init... %d", cc++);
 	// Create new text-object

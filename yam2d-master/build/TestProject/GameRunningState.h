@@ -6,9 +6,10 @@ class GameRunningState : public GameState
 {
 public:
 	GameRunningState(GameApp* app);
-	virtual ~GameRunningState(){}
+	virtual ~GameRunningState();
 	virtual bool update(ESContext* ctx, float deltaTime);
 	virtual void draw(ESContext* ctx);
 private:
-	Ref<Map> m_map;
+	Ref<TmxMap> m_map;
+	ComponentFactory* componentFactory;
 };
