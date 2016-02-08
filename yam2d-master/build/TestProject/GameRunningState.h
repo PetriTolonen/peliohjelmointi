@@ -12,4 +12,5 @@ public:
 private:
 	Ref<TmxMap> m_map;
 	ComponentFactory* componentFactory;
+	Ref<GameObject> paddle;
 };

@@ -18,11 +18,21 @@ GameRunningState::GameRunningState(GameApp* app) : GameState(app)
 
 	// Move camera to middle of map.
 	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f - 0.5f));
+
+	// Paddle sprite
+	paddle = createSpriteGameObject("assets/objects.png", 128.0f, 64.0f, 64, 64, 128.0f, 64.0f);
+	
+	paddle->setName("paddle");
+
+	paddle->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f + 5.0f));
+
+	m_map->getLayer("Objects")->addGameObject(paddle);
 }
 
 GameRunningState::~GameRunningState()
 {
 	//std::cout << "Runnig state destructor" << std::endl;
+	delete componentFactory;
 }
 
 bool GameRunningState::update(ESContext* ctx, float deltaTime)
