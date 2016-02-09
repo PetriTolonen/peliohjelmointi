@@ -33,25 +33,25 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	m_map->addLayer(Map::MAPLAYER0, objectLayer);
 
 	// Create new start game object
-	GameObject* start = createSpriteGameObject("assets/StartExit.png", tileSize.x, tileSize.y,0,0,128,128);
+	GameObject* start = createSpriteGameObject("assets/StartExit2.png", tileSize.x, tileSize.y,0,0,128,128);
 
 	start->setName("start");
 	// Add start to level
 	objectLayer->addGameObject(start);
 	// Set position
-	start->setPosition(vec2(0, -0.51f));
+	start->setPosition(vec2(1.4f, -0.7f));
 
 	// Create new start game object
-	GameObject* exit = createSpriteGameObject("assets/StartExit.png", tileSize.x, tileSize.y,128,0,128,128);
+	GameObject* exit = createSpriteGameObject("assets/StartExit2.png", tileSize.x, tileSize.y,0,128,128,128);
 
 	exit->setName("exit");
 	// Add exit to level
 	objectLayer->addGameObject(exit);
 	// Set position
-	exit->setPosition(vec2(0, 0.51f));
+	exit->setPosition(vec2(1.4f, 0.7f));
 
 	currentSelection = 0;
-	m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+	m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.0f, 1.0f, 0.4f);
 
 
 	esLogMessage("Init... Done");
@@ -112,7 +112,7 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 	}
 
 	// Color current selection.
-	m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.2f, 1.0f, 0.2f);
+	m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.0f, 1.0f, 0.4f);
 
 	// Mouse selection by pressing left mouse button.
 	if (isMouseButtonReleased(MOUSE_LEFT))
