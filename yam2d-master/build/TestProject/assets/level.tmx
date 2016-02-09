@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="Objects" tilewidth="64" tileheight="64" tilecount="16" columns="4">
   <image source="objects.png" trans="ffffff" width="256" height="256"/>
  </tileset>
- <tileset firstgid="17" source="tilemap.tsx"/>
+ <tileset firstgid="17" source="assets/tilemap.tsx"/>
  <layer name="Background" width="20" height="12">
   <data encoding="base64" compression="zlib">
    eJxjYWBgYKEyZqYSHjVv1LxR8/CbBwC9rwL7
@@ -11,7 +11,7 @@
  </layer>
  <layer name="Objects" width="20" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDFUAAAPAAAE=
+   eJxjYBi5QJRMGhcQI5PGBcTJpHEBCTLpUTB4AQBlEwJ3
   </data>
  </layer>
  <objectgroup name="StaticColliders">

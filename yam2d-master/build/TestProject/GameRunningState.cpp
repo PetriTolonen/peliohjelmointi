@@ -8,29 +8,21 @@ GameRunningState::GameRunningState(GameApp* app) : GameState(app)
 	esLogMessage(__FUNCTION__);
 	int cc = 0;
 
-	//Map Tilesize
-	vec2 tileSize(128, 128);
-
+	esLogMessage("Init... %d", cc++);
 	m_map = new TmxMap();
+
+	esLogMessage("Init... %d", cc++);
 	componentFactory = new MyComponentFactory();
+
+	esLogMessage("Init... %d", cc++);
 	componentFactory->setCurrentMap(m_map);
 
+	esLogMessage("Init... %d", cc++);
 	m_map->loadMapFile("assets/level.tmx", componentFactory);
 
+	esLogMessage("Init... %d", cc++);
 	// Move camera to middle of map.
 	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f - 0.5f));
-
-	//// Paddle sprite
-	//paddle = createSpriteGameObject("assets/objects.png", 128.0f, 64.0f, 64, 64, 128.0f, 64.0f);	
-	//paddle->setName("paddle");
-	//paddle->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f + 5.0f));
-
-	//m_map->getLayer("Objects")->addGameObject(paddle);
-
-	GameObject* player = (GameObject*)componentFactory->createNewEntity(componentFactory, "PlayerPad", 0, PropertySet());
-	m_map->getLayer("DynamicObjects")->addGameObject(player);
-
-
 
 	esLogMessage("Init... Done");
 }

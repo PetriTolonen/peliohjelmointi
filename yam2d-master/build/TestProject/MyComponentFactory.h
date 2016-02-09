@@ -42,16 +42,16 @@ public:
 
 	virtual Entity* createNewEntity(ComponentFactory* componentFactory, const std::string& type, Entity* parent, const yam2d::PropertySet& properties)
 	{
-		esLogMessage("1");
 		if ("StaticColliders" == type)
 		{
-			esLogMessage("2");
+			esLogMessage("StaticColliders created by MyComponentFactory");
 			GameObject* gameObject = new GameObject(parent, properties);
 			return gameObject;
 		}
 		
 		else if ("Ball" == type)
 		{
+			esLogMessage("Ball created by MyComponentFactory");
 			GameObject* gameObject = new GameObject(0, 0);
 			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
 			return gameObject;
@@ -59,7 +59,7 @@ public:
 		
 		else if ("Brick" == type)
 		{
-			esLogMessage("3");
+			esLogMessage("Brick created by MyComponentFactory");
 			GameObject* gameObject = new GameObject(0, 0);
 			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
 			return gameObject;
@@ -67,7 +67,7 @@ public:
 		
 		else if ("PlayerPad" == type)
 		{
-			esLogMessage("4");
+			esLogMessage("PlayerPad created by MyComponentFactory");
 			// Create new player.
 			GameObject* gameObject = new GameObject(0, 0);
 			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));

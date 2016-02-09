@@ -22,7 +22,7 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	m_map->addLayer(Map::BACKGROUND0, backgroundLayer);
 
 	// Create new sprite GameObject from texture (background sprite) size is same than screen size.
-	GameObject* backgroundGameObject = createSpriteGameObject("assets/splash.png", 1280.0f, 720.0f);
+	GameObject* backgroundGameObject = createSpriteGameObject("assets/abstractbackground.png", 1280.0f, 720.0f);
 
 	backgroundLayer->addGameObject(backgroundGameObject);
 

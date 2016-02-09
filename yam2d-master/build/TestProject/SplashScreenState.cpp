@@ -32,6 +32,10 @@ SplashScreenState::SplashScreenState(GameApp* app) : GameState(app)
 	// Create new text-object
 	text = new Text(0, font);
 
+	esLogMessage("Init... %d", cc++);
+	// Text color
+	text->setColor(0.0f, 1.0f, 0.5f);
+
 	esLogMessage("Init... Done");
 }
 
@@ -43,22 +47,21 @@ bool SplashScreenState::update(ESContext* ctx, float deltaTime)
 {
 	//esLogMessage(__FUNCTION__);
 	// Update total time counter.
-	count += deltaTime;
 	m_timer += deltaTime;
 
 	// Set text.
-	text->setText("Splash!!");
+	text->setText("Splash screen");
 
 	// Clear sprite before add new dynamic sprites.
 	batch->clear();
 
 	// Add sprite. Rotate it according to total time.
-	batch->addSprite(splashTexture, m_sprite, vec2(0, 0), count, vec2(500));
+	batch->addSprite(splashTexture, m_sprite, vec2(0, 0), 0, vec2(720));
 
 	// Add text to position -400,300
-	batch->addText(fontTexture, text, vec2(-ctx->width / 3, ctx->height / 3), 0);
+	batch->addText(fontTexture, text, vec2(-ctx->width / 3, ctx->height / 2.5f), 0);
 
-	if (m_timer > 2.0f)
+	if (m_timer > 3.0f)
 	{
 		getApp()->setState(new MainMenuState(getApp()));
 	}
