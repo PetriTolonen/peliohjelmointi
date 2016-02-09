@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameState.h"
+#include "MyComponentFactory.h"
 
 class GameRunningState : public GameState
 {
@@ -11,6 +12,7 @@ public:
 	virtual void draw(ESContext* ctx);
 private:
 	Ref<TmxMap> m_map;
-	ComponentFactory* componentFactory;
+	MyComponentFactory* componentFactory;
 	Ref<GameObject> paddle;
+	float speed;	
 };

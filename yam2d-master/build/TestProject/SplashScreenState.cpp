@@ -58,7 +58,7 @@ bool SplashScreenState::update(ESContext* ctx, float deltaTime)
 	// Add text to position -400,300
 	batch->addText(fontTexture, text, vec2(-ctx->width / 3, ctx->height / 3), 0);
 
-	if (m_timer > 3.0f)
+	if (m_timer > 2.0f)
 	{
 		getApp()->setState(new MainMenuState(getApp()));
 	}

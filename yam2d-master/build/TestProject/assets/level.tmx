@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="64" tileheight="64" nextobjectid="3">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="64" tileheight="64" nextobjectid="22">
  <tileset firstgid="1" name="Objects" tilewidth="64" tileheight="64" tilecount="16" columns="4">
   <image source="objects.png" trans="ffffff" width="256" height="256"/>
  </tileset>
+ <tileset firstgid="17" source="tilemap.tsx"/>
  <layer name="Background" width="20" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYIAAVjTMgEN8KGN0P+ECA+3OUTyKicUAH7AEdQ==
+   eJxjYWBgYKEyZqYSHjVv1LxR8/CbBwC9rwL7
   </data>
  </layer>
  <layer name="Objects" width="20" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYKEyphZAN48JiJnJoEfNo415lILhZB4jlc0jBoDMAgBXtQFZ
+   eJxjYBgFo2AUDFUAAAPAAAE=
   </data>
  </layer>
+ <objectgroup name="StaticColliders">
+  <object id="3" name="Left" type="StaticColliders" x="0" y="0" width="64" height="768"/>
+  <object id="6" name="Right" type="StaticColliders" x="1216" y="0" width="64" height="768"/>
+  <object id="8" name="Top" type="StaticColliders" x="0" y="0" width="1280" height="64"/>
+  <object id="10" name="Bottom" type="StaticColliders" x="0" y="768" width="1280" height="64"/>
+ </objectgroup>
+ <objectgroup name="DynamicObjects">
+  <object id="15" name="Ball" type="Ball" gid="1" x="640" y="704" width="64" height="64"/>
+  <object id="21" name="PlayerPad" type="PlayerPad" gid="19" x="611" y="768" width="128" height="64"/>
+ </objectgroup>
 </map>

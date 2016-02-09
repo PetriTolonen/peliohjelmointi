@@ -107,6 +107,7 @@
     <ClInclude Include="GameRunningState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="MyComponentFactory.h" />
     <ClInclude Include="SplashScreenState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

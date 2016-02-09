@@ -12,26 +12,32 @@ GameRunningState::GameRunningState(GameApp* app) : GameState(app)
 	vec2 tileSize(128, 128);
 
 	m_map = new TmxMap();
-	componentFactory = new DefaultComponentFactory();
+	componentFactory = new MyComponentFactory();
+	componentFactory->setCurrentMap(m_map);
 
 	m_map->loadMapFile("assets/level.tmx", componentFactory);
 
 	// Move camera to middle of map.
 	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f - 0.5f));
 
-	// Paddle sprite
-	paddle = createSpriteGameObject("assets/objects.png", 128.0f, 64.0f, 64, 64, 128.0f, 64.0f);
-	
-	paddle->setName("paddle");
+	//// Paddle sprite
+	//paddle = createSpriteGameObject("assets/objects.png", 128.0f, 64.0f, 64, 64, 128.0f, 64.0f);	
+	//paddle->setName("paddle");
+	//paddle->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f + 5.0f));
 
-	paddle->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f + 5.0f));
+	//m_map->getLayer("Objects")->addGameObject(paddle);
 
-	m_map->getLayer("Objects")->addGameObject(paddle);
+	GameObject* player = (GameObject*)componentFactory->createNewEntity(componentFactory, "PlayerPad", 0, PropertySet());
+	m_map->getLayer("DynamicObjects")->addGameObject(player);
+
+
+
+	esLogMessage("Init... Done");
 }
 
 GameRunningState::~GameRunningState()
 {
-	//std::cout << "Runnig state destructor" << std::endl;
+	//std::cout << "GameRunnig state destructor" << std::endl;
 	delete componentFactory;
 }
 
