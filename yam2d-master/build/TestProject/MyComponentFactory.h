@@ -52,7 +52,7 @@ public:
 		else if ("Ball" == type)
 		{
 			esLogMessage("Ball created by MyComponentFactory");
-			GameObject* gameObject = new GameObject(0, 0);
+			GameObject* gameObject = new GameObject(parent, properties);
 			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
 			return gameObject;
 		}
@@ -60,7 +60,7 @@ public:
 		else if ("Brick" == type)
 		{
 			esLogMessage("Brick created by MyComponentFactory");
-			GameObject* gameObject = new GameObject(0, 0);
+			GameObject* gameObject = new GameObject(parent, properties);
 			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
 			return gameObject;
 		}
@@ -69,7 +69,7 @@ public:
 		{
 			esLogMessage("PlayerPad created by MyComponentFactory");
 			// Create new player.
-			GameObject* gameObject = new GameObject(0, 0);
+			GameObject* gameObject = new GameObject(parent, properties);
 			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
 			return gameObject;
 		}
