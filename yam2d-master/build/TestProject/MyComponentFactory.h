@@ -10,6 +10,8 @@
 #include <Text.h>
 #include <Texture.h>
 
+#include "PlayerPaddleController.h"
+
 using namespace yam2d;
 
 class MyComponentFactory : public DefaultComponentFactory
@@ -71,6 +73,9 @@ public:
 			// Create new player.
 			GameObject* gameObject = new GameObject(parent, properties);
 			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
+			PlayerPaddleController* playerController = new PlayerPaddleController(gameObject);
+			gameObject->addComponent(playerController);
+			gameObject->setName("Player");
 			return gameObject;
 		}
 	

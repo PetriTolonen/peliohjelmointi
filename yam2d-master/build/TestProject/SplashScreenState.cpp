@@ -35,6 +35,7 @@ SplashScreenState::SplashScreenState(GameApp* app) : GameState(app)
 	esLogMessage("Init... %d", cc++);
 	// Text color
 	text->setColor(0.0f, 1.0f, 0.5f);
+	text->setDepth(1.0f);
 
 	esLogMessage("Init... Done");
 }
@@ -59,9 +60,9 @@ bool SplashScreenState::update(ESContext* ctx, float deltaTime)
 	batch->addSprite(splashTexture, m_sprite, vec2(0, 0), 0, vec2(720));
 
 	// Add text to position -400,300
-	batch->addText(fontTexture, text, vec2(-ctx->width / 3, ctx->height / 2.5f), 0);
+	batch->addText(fontTexture, text, vec2(-ctx->width / 2.5f, ctx->height / 2.5f), 0);
 
-	if (m_timer > 3.0f)
+	if (m_timer > 5.0f)
 	{
 		getApp()->setState(new MainMenuState(getApp()));
 	}
