@@ -25,11 +25,13 @@ public:
 	const yam2d::GameObject* getGameObject() const { return (const yam2d::GameObject*)getOwner(); }
 
 	void setPlayerPad(PlayerPaddleController* pad){ this->pad = pad; }
-	void setDirectionVector(slm::vec3 normal){ direction = slm::reflect(direction, slm::normalize(normal)); }
+
+	slm::vec2 getDirectionVector(){ return direction; }
+	void setDirectionVector(slm::vec2 dir){ this->direction = dir; }
 private:
 	bool moving;
 	PlayerPaddleController* pad;
-	slm::vec3 direction;
+	slm::vec2 direction;
 };
 
 

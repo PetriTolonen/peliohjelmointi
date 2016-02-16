@@ -42,16 +42,12 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 	// Static collisions
 	for (int i = 0; i < sizeof(m_map->getLayer("StaticColliders")); i++)
 	{
-		slm::vec2 direction = slm::vec2(0.0f, 0.0f);
-		if (m_map->getLayer("StaticColliders")->getGameObjects()[i]->collidesTo(m_map->findGameObjectByName("Ball"), &direction))
+		if (m_map->getLayer("StaticColliders")->getGameObjects()[i]->collidesTo(m_map->findGameObjectByName("Ball")))
 		{
 			esLogMessage("Ball colliding static collider");
-			
-			m_map->findGameObjectByName("Ball")->getComponent<BallController>()->setDirectionVector(slm::vec3(direction.x, direction.y, 0.0f));
 		}
 	}
-		
-
+	
 	if (isKeyReleased(KEY_ESCAPE))
 	{
 		getApp()->setState(new MainMenuState(getApp()));

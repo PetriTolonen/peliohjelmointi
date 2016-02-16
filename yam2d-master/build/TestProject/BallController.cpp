@@ -11,7 +11,7 @@ BallController::BallController(GameObject* owner)
 {
 	float moveSpeed = 3.5f; // tiles / second
 	moving = false;
-	direction = slm::vec3(moveSpeed, -moveSpeed, 0.0f);
+	direction = slm::vec2(moveSpeed, -moveSpeed);
 }
 
 
@@ -31,7 +31,7 @@ void BallController::update(float deltaTime)
 
 	if (moving)
 	{
-		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*slm::vec2(direction.x, direction.y));
+		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*direction);
 	}
 	else
 	{
