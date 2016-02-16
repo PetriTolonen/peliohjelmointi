@@ -4,6 +4,7 @@
 // Include base class
 #include <SpriteComponent.h>
 #include <GameObject.h>
+#include "PlayerPaddleController.h"
 
 // Use yam2d::Component as base class for our player. Use also yam2d::Updatable -interface, for update-method.
 class BallController : public yam2d::Component, public yam2d::Updatable
@@ -22,8 +23,12 @@ public:
 
 	yam2d::GameObject* getGameObject() { return (yam2d::GameObject*)getOwner(); }
 	const yam2d::GameObject* getGameObject() const { return (const yam2d::GameObject*)getOwner(); }
+
+	void setPlayerPad(PlayerPaddleController* pad){ this->pad = pad; }
 private:
-	bool release;
+	bool moving;
+	PlayerPaddleController* pad;
+	slm::vec2 direction;
 };
 
 

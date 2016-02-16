@@ -9,7 +9,6 @@ Init... 6
 Init... Done
 MainMenuState::MainMenuState
 Init... Done
-Object start picked at position 1.40,-0.70!
 GameRunningState::GameRunningState
 Init... 0
 Init... 1
@@ -23,6 +22,6 @@ Ball created by MyComponentFactory
 PlayerPad created by MyComponentFactory
 Init... 4
 Init... Done
+Space pressed: Ball moving
 MainMenuState::MainMenuState
 Init... Done
-Object exit picked at position 1.40,0.70!
