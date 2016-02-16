@@ -22,7 +22,7 @@ GameRunningState::GameRunningState(GameApp* app) : GameState(app)
 
 	esLogMessage("Init... %d", cc++);
 	// Move camera to middle of map.
-	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f - 0.5f));
+	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 1.0f, m_map->getHeight() / 2.0f - 0.5f));
 
 	esLogMessage("Init... Done");
 }

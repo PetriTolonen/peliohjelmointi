@@ -21,7 +21,7 @@
   <object id="10" name="Bottom" type="StaticColliders" x="0" y="768" width="1280" height="64"/>
  </objectgroup>
  <objectgroup name="DynamicObjects">
-  <object id="15" name="Ball" type="Ball" gid="1" x="640" y="640" width="64" height="64"/>
-  <object id="21" name="PlayerPad" type="PlayerPad" gid="19" x="576" y="704" width="128" height="64"/>
+  <object id="15" name="Ball" type="Ball" gid="1" x="640" y="704" width="64" height="64"/>
+  <object id="21" name="PlayerPad" type="PlayerPad" gid="19" x="576" y="768" width="128" height="64"/>
  </objectgroup>
 </map>

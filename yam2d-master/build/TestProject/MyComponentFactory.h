@@ -11,6 +11,7 @@
 #include <Texture.h>
 
 #include "PlayerPaddleController.h"
+#include "BallController.h"
 
 using namespace yam2d;
 
@@ -56,6 +57,9 @@ public:
 			esLogMessage("Ball created by MyComponentFactory");
 			GameObject* gameObject = new GameObject(parent, properties);
 			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
+			BallController* ballController = new BallController(gameObject);
+			gameObject->addComponent(ballController);
+			gameObject->setName("Ball");
 			return gameObject;
 		}
 		
