@@ -23,5 +23,32 @@ PlayerPad created by MyComponentFactory
 Init... 4
 Init... Done
 Space pressed: Ball moving
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
+Ball colliding static collider
 MainMenuState::MainMenuState
 Init... Done
