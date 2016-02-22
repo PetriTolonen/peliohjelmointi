@@ -51,6 +51,7 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 		if (lives == 0)
 		{
 			gameOver = true;
+			moving = false;
 			direction = BeginningDirection;
 			return;
 		}

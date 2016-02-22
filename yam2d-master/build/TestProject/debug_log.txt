@@ -28,25 +28,7 @@ Init... 4
 Init... Done
 Space pressed: Ball moving
 Space pressed: Ball moving
-MainMenuState::MainMenuState
-Init... Done
-GameRunningState::GameRunningState
-Init... 0
-Init... 1
-Init... 2
-Init... 3
-StaticColliders created by MyComponentFactory
-StaticColliders created by MyComponentFactory
-StaticColliders created by MyComponentFactory
-StaticColliders created by MyComponentFactory
-Ball created by MyComponentFactory
-PlayerPad created by MyComponentFactory
-Brick created by MyComponentFactory
-Brick created by MyComponentFactory
-Brick created by MyComponentFactory
-Brick created by MyComponentFactory
-Init... 4
-Init... Done
+Space pressed: Ball moving
 Space pressed: Ball moving
 MainMenuState::MainMenuState
 Init... Done
