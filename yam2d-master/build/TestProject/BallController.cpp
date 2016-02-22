@@ -9,9 +9,12 @@ using namespace yam2d; // Use namespace yam3d implicitily.
 BallController::BallController(GameObject* owner)
 	: Component(owner, Component::getDefaultProperties()) // Initalize base class by giving parameres to it
 {
-	float moveSpeed = 3.5f; // tiles / second
+	moveSpeed = 3.5f; // tiles / second
 	moving = false;
-	direction = slm::vec3(moveSpeed, -moveSpeed, 0.0f);
+	gameOver = false;
+	BeginningDirection = slm::vec3(moveSpeed, -moveSpeed, 0.0f);
+	direction = BeginningDirection;
+	lives = 3;
 }
 
 
@@ -21,7 +24,10 @@ BallController::~BallController(void)
 
 void BallController::update(float deltaTime)
 {
-	
+	if (gameOver)
+	{
+		// TODO 
+	}
 
 	if (isKeyPressed(KEY_SPACE))
 	{
@@ -33,11 +39,53 @@ void BallController::update(float deltaTime)
 	{
 		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*slm::vec2(direction.x, direction.y));
 	}
-	else
+	else if (!gameOver)
 	{
-		getGameObject()->setPosition(slm::vec2(pad->getGameObject()->getPosition().x, getGameObject()->getPosition().y));
+		getGameObject()->setPosition(slm::vec2(pad->getGameObject()->getPosition().x, pad->getGameObject()->getPosition().y - 1));
+	}	
+}
+
+void BallController::HandleCollision(GameObject* otherObj)
+{
+	if (otherObj->getName() == "Right" && direction.y > 0)
+	{
+		direction = slm::vec3(-moveSpeed, moveSpeed, 0.0f);
+	}
+	else if (otherObj->getName() == "Right" && direction.y < 0)
+	{
+		direction = slm::vec3(-moveSpeed, -moveSpeed, 0.0f);
 	}
 
-	
+	else if (otherObj->getName() == "Left" && direction.y > 0)
+	{
+		direction = slm::vec3(moveSpeed, moveSpeed, 0.0f);
+	}
+	else if (otherObj->getName() == "Left" && direction.y < 0)
+	{
+		direction = slm::vec3(-moveSpeed, -moveSpeed, 0.0f);
+	}
+		
+	else if (otherObj->getName() == "Top" && direction.x > 0)
+	{
+		direction = slm::vec3(moveSpeed, moveSpeed, 0.0f);
+	}
+	else if (otherObj->getName() == "Top" && direction.x < 0)
+	{
+		direction = slm::vec3(-moveSpeed, moveSpeed, 0.0f);
+	}
+
+	else if (otherObj->getName() == "Bottom")
+	{
+		if (lives = 0)
+		{
+			gameOver = true;
+		}
+		else
+		{
+			lives--;
+			moving = false;
+			direction = BeginningDirection;
+		}
+	}
 }
 

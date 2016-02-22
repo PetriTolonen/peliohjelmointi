@@ -14,5 +14,4 @@ private:
 	Ref<TmxMap> m_map;
 	MyComponentFactory* componentFactory;
 	Ref<GameObject> paddle;
-	float speed;	
 };
