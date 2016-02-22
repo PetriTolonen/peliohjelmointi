@@ -39,14 +39,31 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 {
 	m_map->update(deltaTime);
 
+	slm::vec2 collisionNormal;
+
 	// Static collisions
 	for (int i = 0; i < sizeof(m_map->getLayer("StaticColliders")); i++)
 	{
-		if (m_map->getLayer("StaticColliders")->getGameObjects()[i]->collidesTo(m_map->findGameObjectByName("Ball")))
+		if (m_map->findGameObjectByName("Ball")->collidesTo(m_map->getLayer("StaticColliders")->getGameObjects()[i], &collisionNormal))
 		{
-			esLogMessage("Ball colliding static collider");
-			m_map->findGameObjectByName("Ball")->getComponent<BallController>()->HandleCollision(m_map->getLayer("StaticColliders")->getGameObjects()[i]);
+			m_map->findGameObjectByName("Ball")->getComponent<BallController>()->HandleCollision(m_map->getLayer("StaticColliders")->getGameObjects()[i], collisionNormal);
 		}
+	}
+
+	// Object collisions
+	for (int i = 0; i < sizeof(m_map->getLayer("Bricks")); i++)
+	{
+		if (m_map->findGameObjectByName("Ball")->collidesTo(m_map->getLayer("Bricks")->getGameObjects()[i], &collisionNormal))
+		{
+			m_map->findGameObjectByName("Ball")->getComponent<BallController>()->HandleCollision(m_map->getLayer("Bricks")->getGameObjects()[i], collisionNormal);
+			m_map->getLayer("Bricks")->getGameObjects()[i]->setPosition(-1000.0f, 0.0f);
+		}
+	}
+
+	// Ball colliding player paddle
+	if (m_map->findGameObjectByName("Ball")->collidesTo(m_map->findGameObjectByName("Player"), &collisionNormal))
+	{
+		m_map->findGameObjectByName("Ball")->getComponent<BallController>()->HandleCollision(m_map->findGameObjectByName("Player"), collisionNormal);
 	}
 		
 	if (isKeyReleased(KEY_ESCAPE))

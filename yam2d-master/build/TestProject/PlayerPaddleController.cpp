@@ -20,11 +20,11 @@ void PlayerPaddleController::update(float deltaTime)
 {
 	float moveSpeed = 4.0f; // tiles / second
 
-	if (getKeyState(KEY_LEFT))
+	if (getKeyState(KEY_LEFT) && getGameObject()->getPosition().x > 1.0f)
 	{
 		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*moveSpeed*vec2(-1.0f,0.0f));
 	}
-	if (getKeyState(KEY_RIGHT))
+	if (getKeyState(KEY_RIGHT) && getGameObject()->getPosition().x < 17.0f)
 	{
 		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*moveSpeed*vec2(1.0f, 0.0f));
 	}

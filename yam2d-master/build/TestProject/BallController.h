@@ -26,14 +26,14 @@ public:
 
 	void setPlayerPad(PlayerPaddleController* pad){ this->pad = pad; }
 
-	void HandleCollision(yam2d::GameObject* otherObj);
+	void HandleCollision(yam2d::GameObject* otherObj, const slm::vec2& collisionNormal);
 private:
 	bool moving;
 	bool gameOver;
 	PlayerPaddleController* pad;
 	slm::vec2 direction;
 	slm::vec2 BeginningDirection;
-	float moveSpeed;
+	float moveSpeedX, moveSpeedY;
 	int lives;
 };
 
