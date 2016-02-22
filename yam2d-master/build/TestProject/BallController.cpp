@@ -28,7 +28,7 @@ void BallController::update(float deltaTime)
 	{
 		// TODO 
 	}
-
+	
 	if (isKeyPressed(KEY_SPACE))
 	{
 		moving = true;
@@ -37,7 +37,7 @@ void BallController::update(float deltaTime)
 
 	if (moving)
 	{
-		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*slm::vec2(direction.x, direction.y));
+		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*direction);
 	}
 	else if (!gameOver)
 	{
@@ -64,7 +64,7 @@ void BallController::HandleCollision(GameObject* otherObj)
 	{
 		direction = slm::vec3(-moveSpeed, -moveSpeed, 0.0f);
 	}
-		
+
 	else if (otherObj->getName() == "Top" && direction.x > 0)
 	{
 		direction = slm::vec3(moveSpeed, moveSpeed, 0.0f);
@@ -73,7 +73,7 @@ void BallController::HandleCollision(GameObject* otherObj)
 	{
 		direction = slm::vec3(-moveSpeed, moveSpeed, 0.0f);
 	}
-
+	
 	else if (otherObj->getName() == "Bottom")
 	{
 		if (lives = 0)

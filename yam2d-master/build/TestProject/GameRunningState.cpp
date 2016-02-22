@@ -47,8 +47,8 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 			esLogMessage("Ball colliding static collider");
 			m_map->findGameObjectByName("Ball")->getComponent<BallController>()->HandleCollision(m_map->getLayer("StaticColliders")->getGameObjects()[i]);
 		}
-	}		
-
+	}
+		
 	if (isKeyReleased(KEY_ESCAPE))
 	{
 		getApp()->setState(new MainMenuState(getApp()));
