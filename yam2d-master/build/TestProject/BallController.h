@@ -31,8 +31,8 @@ private:
 	bool moving;
 	bool gameOver;
 	PlayerPaddleController* pad;
-	slm::vec3 direction;
-	slm::vec3 BeginningDirection;
+	slm::vec2 direction;
+	slm::vec2 BeginningDirection;
 	float moveSpeed;
 	int lives;
 };

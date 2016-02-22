@@ -12,7 +12,7 @@ BallController::BallController(GameObject* owner)
 	moveSpeed = 3.5f; // tiles / second
 	moving = false;
 	gameOver = false;
-	BeginningDirection = slm::vec3(moveSpeed, -moveSpeed, 0.0f);
+	BeginningDirection = slm::vec2(moveSpeed, -moveSpeed);
 	direction = BeginningDirection;
 	lives = 3;
 }
@@ -49,29 +49,29 @@ void BallController::HandleCollision(GameObject* otherObj)
 {
 	if (otherObj->getName() == "Right" && direction.y > 0)
 	{
-		direction = slm::vec3(-moveSpeed, moveSpeed, 0.0f);
+		direction = slm::vec2(-moveSpeed, moveSpeed);
 	}
 	else if (otherObj->getName() == "Right" && direction.y < 0)
 	{
-		direction = slm::vec3(-moveSpeed, -moveSpeed, 0.0f);
+		direction = slm::vec2(-moveSpeed, -moveSpeed);
 	}
 
 	else if (otherObj->getName() == "Left" && direction.y > 0)
 	{
-		direction = slm::vec3(moveSpeed, moveSpeed, 0.0f);
+		direction = slm::vec2(moveSpeed, moveSpeed);
 	}
 	else if (otherObj->getName() == "Left" && direction.y < 0)
 	{
-		direction = slm::vec3(-moveSpeed, -moveSpeed, 0.0f);
+		direction = slm::vec2(-moveSpeed, -moveSpeed);
 	}
 
 	else if (otherObj->getName() == "Top" && direction.x > 0)
 	{
-		direction = slm::vec3(moveSpeed, moveSpeed, 0.0f);
+		direction = slm::vec2(moveSpeed, moveSpeed);
 	}
 	else if (otherObj->getName() == "Top" && direction.x < 0)
 	{
-		direction = slm::vec3(-moveSpeed, moveSpeed, 0.0f);
+		direction = slm::vec2(-moveSpeed, moveSpeed);
 	}
 	
 	else if (otherObj->getName() == "Bottom")
