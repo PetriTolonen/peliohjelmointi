@@ -39,10 +39,15 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 {
 	m_map->update(deltaTime);
 
+	if (m_map->getLayer("Bricks")->getGameObjects().size() == 0)
+	{
+		m_map->findGameObjectByName("Ball")->getComponent<BallController>()->stopBall();
+	}
+
 	slm::vec2 collisionNormal;
 
 	// Static collisions
-	for (int i = 0; i < sizeof(m_map->getLayer("StaticColliders")); i++)
+	for (int i = 0; i < m_map->getLayer("StaticColliders")->getGameObjects().size(); i++)
 	{
 		if (m_map->findGameObjectByName("Ball")->collidesTo(m_map->getLayer("StaticColliders")->getGameObjects()[i], &collisionNormal))
 		{
@@ -51,12 +56,12 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 	}
 
 	// Object collisions
-	for (int i = 0; i < sizeof(m_map->getLayer("Bricks")); i++)
+	for (int i = 0; i < m_map->getLayer("Bricks")->getGameObjects().size(); i++)
 	{
 		if (m_map->findGameObjectByName("Ball")->collidesTo(m_map->getLayer("Bricks")->getGameObjects()[i], &collisionNormal))
 		{
 			m_map->findGameObjectByName("Ball")->getComponent<BallController>()->HandleCollision(m_map->getLayer("Bricks")->getGameObjects()[i], collisionNormal);
-			m_map->getLayer("Bricks")->getGameObjects()[i]->setPosition(-1000.0f, 0.0f);
+			m_map->deleteGameObject(m_map->getLayer("Bricks")->getGameObjects()[i]);
 		}
 	}
 

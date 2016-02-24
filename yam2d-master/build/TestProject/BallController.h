@@ -27,6 +27,8 @@ public:
 	void setPlayerPad(PlayerPaddleController* pad){ this->pad = pad; }
 
 	void HandleCollision(yam2d::GameObject* otherObj, const slm::vec2& collisionNormal);
+
+	void stopBall(){ moving = false; };
 private:
 	bool moving;
 	bool gameOver;
