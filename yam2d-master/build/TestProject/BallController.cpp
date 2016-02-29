@@ -1,6 +1,7 @@
 #include "BallController.h" // Include Player class header
 
 #include "Input.h"
+#include <iostream>
 
 using namespace yam2d; // Use namespace yam3d implicitily.
 
@@ -11,9 +12,11 @@ BallController::BallController(GameObject* owner)
 	moveSpeedY = 3.5f; // tiles / second
 	moving = false;
 	gameOver = false;
-	BeginningDirection = slm::vec2(moveSpeedX, -moveSpeedY);
-	direction = BeginningDirection;
+	beginningVelocity = slm::vec2(moveSpeedX, -moveSpeedY);
+	velocity = beginningVelocity;
 	lives = 3;
+	removeFromInside = slm::vec2(0.0f);
+	overlapOffset = 0.001;
 }
 
 
@@ -36,7 +39,7 @@ void BallController::update(float deltaTime)
 
 	if (moving)
 	{
-		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*direction);
+		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*(velocity +removeFromInside));
 	}
 	else if (!gameOver)
 	{
@@ -52,76 +55,103 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 		{
 			gameOver = true;
 			moving = false;
-			direction = BeginningDirection;
+			velocity = beginningVelocity;
 			return;
 		}
 		else
 		{
 			lives--;
 			moving = false;
-			direction = BeginningDirection;
+			velocity = beginningVelocity;
 			return;
 		}
 	}
 
-	// TODO: how to?
-	/*if (otherObj->getName() == "Player")
+	// TODO:
+	if (otherObj->getName() == "Player")
 	{
-		moveSpeedX += collisionNormal.x*3;
-	}*/
+		
+	}
 
 	if (moving)
 	{
+		slm::vec2 tempNormal = collisionNormal;
+		removeFromInside = slm::vec2(0.0f);
+		
 		// First checking if hitting right or left side
 		if ((1 - abs(collisionNormal.x)) < (1- abs(collisionNormal.y)))
 		{
-			// Ball going up hits object to the left side
-			if (collisionNormal.x < 0 && direction.y < 0)
-			{
-				direction = slm::vec2(-moveSpeedX, -moveSpeedY);
-			}
-			// Ball going down hits object to the left side
-			else if (collisionNormal.x < 0 && direction.y > 0)
-			{
-				direction = slm::vec2(-moveSpeedX, moveSpeedY);
-			}
+			//// Ball going up hits object to the left side
+			//if (collisionNormal.x < 0 && velocity.y < 0)
+			//{
+			//	velocity = slm::vec2(-moveSpeedX, -moveSpeedY);
+			//}
+			//// Ball going down hits object to the left side
+			//else if (collisionNormal.x < 0 && velocity.y > 0)
+			//{
+			//	velocity = slm::vec2(-moveSpeedX, moveSpeedY);
+			//}
 
-			// Ball going up hits object to the right side
-			else if (collisionNormal.x > 0 && direction.y < 0)
+			//// Ball going up hits object to the right side
+			//else if (collisionNormal.x > 0 && velocity.y < 0)
+			//{
+			//	velocity = slm::vec2(moveSpeedX, -moveSpeedY);
+			//}
+			//// Ball going down hits object to the right side
+			//else if (collisionNormal.x > 0 && velocity.y > 0)
+			//{
+			//	velocity = slm::vec2(moveSpeedX, moveSpeedY);
+			//}
+			if (velocity.x > 0)
 			{
-				direction = slm::vec2(moveSpeedX, -moveSpeedY);
+				removeFromInside.x = -(1 - abs(tempNormal.x)) - overlapOffset;
 			}
-			// Ball going down hits object to the right side
-			else if (collisionNormal.x > 0 && direction.y > 0)
+			else
 			{
-				direction = slm::vec2(moveSpeedX, moveSpeedY);
+				removeFromInside.x = (1 - abs(tempNormal.x)) + overlapOffset;
 			}
+			tempNormal.y = 0.0f;			
 		}
 		// Else hitting top or bottom side
 		else
 		{
-			// Ball going left hits object to the bottom side
-			if (collisionNormal.y > 0 && direction.x < 0)
-			{
-				direction = slm::vec2(-moveSpeedX, moveSpeedY);
-			}
-			// Ball going right hits object to the bottom side
-			else if (collisionNormal.y > 0 && direction.x > 0)
-			{
-				direction = slm::vec2(moveSpeedX, moveSpeedY);
-			}
+			//// Ball going left hits object to the bottom side
+			//if (collisionNormal.y > 0 && velocity.x < 0)
+			//{
+			//	velocity = slm::vec2(-moveSpeedX, moveSpeedY);
+			//}
+			//// Ball going right hits object to the bottom side
+			//else if (collisionNormal.y > 0 && velocity.x > 0)
+			//{
+			//	velocity = slm::vec2(moveSpeedX, moveSpeedY);
+			//}
 
-			// Ball going left hits object to the top side
-			else if (collisionNormal.y < 0 && direction.x < 0)
+			//// Ball going left hits object to the top side
+			//else if (collisionNormal.y < 0 && velocity.x < 0)
+			//{
+			//	velocity = slm::vec2(-moveSpeedX, -moveSpeedY);
+			//}
+			//// Ball going right hits object to the top side
+			//else if (collisionNormal.y < 0 && velocity.x > 0)
+			//{
+			//	velocity = slm::vec2(moveSpeedX, -moveSpeedY);
+			//}
+			if (velocity.y > 0)
 			{
-				direction = slm::vec2(-moveSpeedX, -moveSpeedY);
+				removeFromInside.y = -(1 - abs(tempNormal.y)) - overlapOffset;
 			}
-			// Ball going right hits object to the top side
-			else if (collisionNormal.y < 0 && direction.x > 0)
+			else
 			{
-				direction = slm::vec2(moveSpeedX, -moveSpeedY);
+				removeFromInside.y = (1 - abs(tempNormal.y)) + overlapOffset;
 			}
-		}		
+			tempNormal.x = 0.0f;
+		}
+		
+		slm::vec3 temp = slm::vec3(velocity, 0.0f);
+		slm::vec3 temp2 = normalize(slm::vec3(tempNormal, 0.0f));
+
+		slm::vec3 newvelocity = slm::reflect(temp, temp2);
+		velocity = slm::vec2(newvelocity.x, newvelocity.y);
 	}	
 }
 
