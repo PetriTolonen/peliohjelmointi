@@ -16,7 +16,10 @@ BallController::BallController(GameObject* owner)
 	velocity = beginningVelocity;
 	lives = 3;
 	removeFromInside = slm::vec2(0.0f);
-	overlapOffset = 0.001;
+	overlapOffset = 0.01f;
+	dampingSpeed = 8.0f;
+	paddleVelocityFactor = 10.0f;
+	count = 0;
 }
 
 
@@ -47,7 +50,7 @@ void BallController::update(float deltaTime)
 	}	
 }
 
-void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& collisionNormal)
+void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& collisionNormal, float deltaTime)
 {
 	if (otherObj->getName() == "Bottom")
 	{
@@ -67,11 +70,9 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 		}
 	}
 
-	// TODO:
-	if (otherObj->getName() == "Player")
-	{
-		
-	}
+	// for debugging
+	count++;
+	std::cout << "colliding " << count << std::endl;
 
 	if (moving)
 	{
@@ -81,27 +82,6 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 		// First checking if hitting right or left side
 		if ((1 - abs(collisionNormal.x)) < (1- abs(collisionNormal.y)))
 		{
-			//// Ball going up hits object to the left side
-			//if (collisionNormal.x < 0 && velocity.y < 0)
-			//{
-			//	velocity = slm::vec2(-moveSpeedX, -moveSpeedY);
-			//}
-			//// Ball going down hits object to the left side
-			//else if (collisionNormal.x < 0 && velocity.y > 0)
-			//{
-			//	velocity = slm::vec2(-moveSpeedX, moveSpeedY);
-			//}
-
-			//// Ball going up hits object to the right side
-			//else if (collisionNormal.x > 0 && velocity.y < 0)
-			//{
-			//	velocity = slm::vec2(moveSpeedX, -moveSpeedY);
-			//}
-			//// Ball going down hits object to the right side
-			//else if (collisionNormal.x > 0 && velocity.y > 0)
-			//{
-			//	velocity = slm::vec2(moveSpeedX, moveSpeedY);
-			//}
 			if (velocity.x > 0)
 			{
 				removeFromInside.x = -(1 - abs(tempNormal.x)) - overlapOffset;
@@ -115,27 +95,6 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 		// Else hitting top or bottom side
 		else
 		{
-			//// Ball going left hits object to the bottom side
-			//if (collisionNormal.y > 0 && velocity.x < 0)
-			//{
-			//	velocity = slm::vec2(-moveSpeedX, moveSpeedY);
-			//}
-			//// Ball going right hits object to the bottom side
-			//else if (collisionNormal.y > 0 && velocity.x > 0)
-			//{
-			//	velocity = slm::vec2(moveSpeedX, moveSpeedY);
-			//}
-
-			//// Ball going left hits object to the top side
-			//else if (collisionNormal.y < 0 && velocity.x < 0)
-			//{
-			//	velocity = slm::vec2(-moveSpeedX, -moveSpeedY);
-			//}
-			//// Ball going right hits object to the top side
-			//else if (collisionNormal.y < 0 && velocity.x > 0)
-			//{
-			//	velocity = slm::vec2(moveSpeedX, -moveSpeedY);
-			//}
 			if (velocity.y > 0)
 			{
 				removeFromInside.y = -(1 - abs(tempNormal.y)) - overlapOffset;
@@ -152,6 +111,20 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 
 		slm::vec3 newvelocity = slm::reflect(temp, temp2);
 		velocity = slm::vec2(newvelocity.x, newvelocity.y);
+
+		if (otherObj->getName() == "Player")
+		{			
+			velocity.x += deltaTime*paddleVelocityFactor*otherObj->getComponent<PlayerPaddleController>()->getVelocity().x;
+		}
+
+		if (velocity.x > 4.0f )
+		{
+			velocity.x -= deltaTime*dampingSpeed;
+		}
+		if (velocity.x < -4.0f)
+		{
+			velocity.x += deltaTime*dampingSpeed;
+		}
 	}	
 }
 

@@ -23,6 +23,11 @@ public:
 
 	yam2d::GameObject* getGameObject() { return (yam2d::GameObject*)getOwner(); }
 	const yam2d::GameObject* getGameObject() const { return (const yam2d::GameObject*)getOwner(); }
+	const slm::vec2 getVelocity(){ return velocity; }
+private:
+	slm::vec2 velocity;
+	float maxSpeed;
+	float increment;
 };
 
 

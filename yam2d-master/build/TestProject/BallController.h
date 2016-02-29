@@ -26,7 +26,7 @@ public:
 
 	void setPlayerPad(PlayerPaddleController* pad){ this->pad = pad; }
 
-	void HandleCollision(yam2d::GameObject* otherObj, const slm::vec2& collisionNormal);
+	void HandleCollision(yam2d::GameObject* otherObj, const slm::vec2& collisionNormal, float deltaTime);
 
 	void stopBall(){ moving = false; };
 private:
@@ -39,6 +39,9 @@ private:
 	int lives;
 	slm::vec2 removeFromInside;
 	float overlapOffset;
+	float dampingSpeed;
+	float paddleVelocityFactor;
+	int count;
 };
 
 
