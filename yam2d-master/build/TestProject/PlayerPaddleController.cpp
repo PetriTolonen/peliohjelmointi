@@ -21,8 +21,6 @@ PlayerPaddleController::~PlayerPaddleController(void)
 
 void PlayerPaddleController::update(float deltaTime)
 {
-	float moveSpeed = 4.0f; // tiles / second
-
 	if (getKeyState(KEY_LEFT) && getGameObject()->getPosition().x > 1.0f)
 	{
 		if (velocity.x > -maxSpeed)
@@ -39,11 +37,23 @@ void PlayerPaddleController::update(float deltaTime)
 	}
 
 	// TODO: fix unwanted moving
-	if (velocity.x > 0.0f)
-		velocity.x -= deltaTime*9.0f;
-	if (velocity.x < 0.0f)
-		velocity.x += deltaTime*9.0f;
+	if (getKeyState(KEY_LEFT) || getKeyState(KEY_RIGHT))
+	{
+		// Let it move
+	}	
+	else
+	{
+		if (velocity.x > 0.0f)
+			velocity.x -= deltaTime*9.0f;
+		if (velocity.x < 0.0f)
+			velocity.x += deltaTime*9.0f;
+		if (abs(velocity.x) < 0.1f)
+		{
+			velocity.x = 0.0f;
+		}
+	}	
 
 	getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*velocity);
+	//getGameObject()->setPosition(ball->getPosition().x + deltaTime*velocity.x, 11.0f);
 }
 

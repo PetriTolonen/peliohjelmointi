@@ -5,6 +5,7 @@
 #include <SpriteComponent.h>
 #include <GameObject.h>
 #include <vec2.h>
+#include "BallController.h"
 
 // Use yam2d::Component as base class for our player. Use also yam2d::Updatable -interface, for update-method.
 class PlayerPaddleController : public yam2d::Component, public yam2d::Updatable
@@ -24,10 +25,12 @@ public:
 	yam2d::GameObject* getGameObject() { return (yam2d::GameObject*)getOwner(); }
 	const yam2d::GameObject* getGameObject() const { return (const yam2d::GameObject*)getOwner(); }
 	const slm::vec2 getVelocity(){ return velocity; }
+	void setBall(yam2d::GameObject* ball){ this->ball = ball; }
 private:
 	slm::vec2 velocity;
 	float maxSpeed;
 	float increment;
+	yam2d::GameObject* ball;
 };
 
 

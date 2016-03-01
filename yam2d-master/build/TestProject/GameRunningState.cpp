@@ -20,11 +20,13 @@ GameRunningState::GameRunningState(GameApp* app) : GameState(app)
 	esLogMessage("Init... %d", cc++);
 	m_map->loadMapFile("assets/level.tmx", componentFactory);
 
-	m_map->findGameObjectByName("Ball")->getComponent<BallController>()->setPlayerPad(m_map->findGameObjectByName("Player")->getComponent<PlayerPaddleController>());
+	m_map->findGameObjectByName("Ball")->getComponent<BallController>()->setPlayerPad(m_map->findGameObjectByName("Player"));
 
 	esLogMessage("Init... %d", cc++);
 	// Move camera to middle of map.
 	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 1.0f, m_map->getHeight() / 2.0f - 0.5f));
+
+	m_map->findGameObjectByName("Player")->getComponent<PlayerPaddleController>()->setBall(m_map->findGameObjectByName("Ball"));
 
 	esLogMessage("Init... Done");
 }

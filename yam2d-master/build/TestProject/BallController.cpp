@@ -16,7 +16,7 @@ BallController::BallController(GameObject* owner)
 	velocity = beginningVelocity;
 	lives = 3;
 	removeFromInside = slm::vec2(0.0f);
-	overlapOffset = 0.01f;
+	overlapOffset = 0.05f;
 	dampingSpeed = 8.0f;
 	paddleVelocityFactor = 10.0f;
 	count = 0;
@@ -38,15 +38,18 @@ void BallController::update(float deltaTime)
 	{
 		moving = true;
 		esLogMessage("Space pressed: Ball moving");
+		velocity.x = pad->getComponent<PlayerPaddleController>()->getVelocity().x;
 	}
 
 	if (moving)
 	{
+		//std::cout << removeFromInside.x << " " << removeFromInside.y <<std::endl;
 		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*(velocity +removeFromInside));
 	}
+
 	else if (!gameOver)
 	{
-		getGameObject()->setPosition(slm::vec2(pad->getGameObject()->getPosition().x, pad->getGameObject()->getPosition().y - 1.1f));
+		getGameObject()->setPosition(slm::vec2(pad->getPosition().x, pad->getPosition().y - 1.1f));
 	}	
 }
 
@@ -71,8 +74,8 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 	}
 
 	// for debugging
-	count++;
-	std::cout << "colliding " << count << std::endl;
+	/*count++;
+	std::cout << "colliding " << count << std::endl;*/
 
 	if (moving)
 	{

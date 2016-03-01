@@ -24,7 +24,7 @@ public:
 	yam2d::GameObject* getGameObject() { return (yam2d::GameObject*)getOwner(); }
 	const yam2d::GameObject* getGameObject() const { return (const yam2d::GameObject*)getOwner(); }
 
-	void setPlayerPad(PlayerPaddleController* pad){ this->pad = pad; }
+	void setPlayerPad(yam2d::GameObject* pad){ this->pad = pad; }
 
 	void HandleCollision(yam2d::GameObject* otherObj, const slm::vec2& collisionNormal, float deltaTime);
 
@@ -32,7 +32,7 @@ public:
 private:
 	bool moving;
 	bool gameOver;
-	PlayerPaddleController* pad;
+	yam2d::GameObject* pad;
 	slm::vec2 velocity;
 	slm::vec2 beginningVelocity;
 	float moveSpeedX, moveSpeedY;
