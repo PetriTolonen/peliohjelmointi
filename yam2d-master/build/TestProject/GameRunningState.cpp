@@ -78,6 +78,11 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 		getApp()->setState(new MainMenuState(getApp()));
 		return true;
 	}
+
+	if (m_map->getLayer("Bricks")->getGameObjects().size() == 0)
+	{
+		getApp()->setState(new MainMenuState(getApp()));
+	}
 	return true;
 }
 

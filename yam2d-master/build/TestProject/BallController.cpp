@@ -2,6 +2,7 @@
 
 #include "Input.h"
 #include <iostream>
+#include "MainMenuState.h"
 
 using namespace yam2d; // Use namespace yam3d implicitily.
 
@@ -34,16 +35,14 @@ void BallController::update(float deltaTime)
 		// TODO 
 	}
 	
-	if (isKeyPressed(KEY_SPACE) && !moving)
+	if (/*isKeyPressed(KEY_SPACE) && !moving*/1)
 	{
 		moving = true;
-		esLogMessage("Space pressed: Ball moving");
-		velocity.x = pad->getComponent<PlayerPaddleController>()->getVelocity().x;
+		//velocity.x = pad->getComponent<PlayerPaddleController>()->getVelocity().x;
 	}
 
 	if (moving)
 	{
-		//std::cout << removeFromInside.x << " " << removeFromInside.y <<std::endl;
 		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*(velocity +removeFromInside));
 	}
 
@@ -81,6 +80,8 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 	{
 		slm::vec2 tempNormal = collisionNormal;
 		removeFromInside = slm::vec2(0.0f);
+
+		std::cout << tempNormal.x << " " << tempNormal.y << std::endl;
 		
 		// First checking if hitting right or left side
 		if ((1 - abs(collisionNormal.x)) < (1- abs(collisionNormal.y)))
@@ -109,6 +110,8 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 			tempNormal.x = 0.0f;
 		}
 		
+		std::cout << removeFromInside.x << "r" << removeFromInside.y << std::endl;
+
 		slm::vec3 temp = slm::vec3(velocity, 0.0f);
 		slm::vec3 temp2 = normalize(slm::vec3(tempNormal, 0.0f));
 
@@ -120,11 +123,11 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 			velocity.x += deltaTime*paddleVelocityFactor*otherObj->getComponent<PlayerPaddleController>()->getVelocity().x;
 		}
 
-		if (velocity.x > 4.0f )
+		if (velocity.x > moveSpeedX)
 		{
 			velocity.x -= deltaTime*dampingSpeed;
 		}
-		if (velocity.x < -4.0f)
+		if (velocity.x < -moveSpeedX)
 		{
 			velocity.x += deltaTime*dampingSpeed;
 		}
