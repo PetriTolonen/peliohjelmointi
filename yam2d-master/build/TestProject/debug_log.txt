@@ -52,3 +52,134 @@ Init... 4
 Init... Done
 MainMenuState::MainMenuState
 Init... Done
+GameRunningState::GameRunningState
+Init... 0
+Init... 1
+Init... 2
+Init... 3
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+Ball created by MyComponentFactory
+PlayerPad created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Init... 4
+Init... Done
+MainMenuState::MainMenuState
+Init... Done
+Object start picked at position 1.40,-0.70!
+GameRunningState::GameRunningState
+Init... 0
+Init... 1
+Init... 2
+Init... 3
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+Ball created by MyComponentFactory
+PlayerPad created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Init... 4
+Init... Done
+MainMenuState::MainMenuState
+Init... Done
+GameRunningState::GameRunningState
+Init... 0
+Init... 1
+Init... 2
+Init... 3
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+StaticColliders created by MyComponentFactory
+Ball created by MyComponentFactory
+PlayerPad created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Brick created by MyComponentFactory
+Init... 4
+Init... Done
+MainMenuState::MainMenuState
+Init... Done
+Object exit picked at position 1.40,0.70!

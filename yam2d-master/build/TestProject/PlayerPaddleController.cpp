@@ -11,7 +11,9 @@ PlayerPaddleController::PlayerPaddleController(GameObject* owner)
 {
 	maxSpeed = 10.0f;
 	velocity = slm::vec2(0.0f);
-	increment = 35.0f;
+	increment = 45.0f;
+
+	slowFactor = 15.0f;
 }
 
 
@@ -44,16 +46,24 @@ void PlayerPaddleController::update(float deltaTime)
 	else
 	{
 		if (velocity.x > 0.0f)
-			velocity.x -= deltaTime*9.0f;
+			velocity.x -= deltaTime*slowFactor;
 		if (velocity.x < 0.0f)
-			velocity.x += deltaTime*9.0f;
+			velocity.x += deltaTime*slowFactor;
 		if (abs(velocity.x) < 0.3f)
 		{
 			velocity.x = 0.0f;
 		}
 	}	
 
+	if (getGameObject()->getPosition().x < -4.0f)
+	{
+		getGameObject()->setPosition(20.0f, getGameObject()->getPosition().y);
+	}
+	if (getGameObject()->getPosition().x > 20.0f)
+	{
+		getGameObject()->setPosition(-4.0f, getGameObject()->getPosition().y);
+	}
+
 	getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*velocity);
-	//getGameObject()->setPosition(ball->getPosition().x + deltaTime*velocity.x, 11.0f);
 }
 

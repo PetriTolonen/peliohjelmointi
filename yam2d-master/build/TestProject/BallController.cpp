@@ -35,7 +35,7 @@ void BallController::update(float deltaTime)
 		// TODO 
 	}
 	
-	if (isKeyPressed(KEY_SPACE) && !moving)
+	if (isKeyPressed(KEY_SPACE) && !moving && !gameOver)
 	{
 		moving = true;
 		velocity.x = pad->getComponent<PlayerPaddleController>()->getVelocity().x;
@@ -118,8 +118,28 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 		velocity = slm::vec2(newvelocity.x, newvelocity.y);
 
 		if (otherObj->getName() == "Player")
-		{			
-			velocity.x += deltaTime*paddleVelocityFactor*otherObj->getComponent<PlayerPaddleController>()->getVelocity().x;
+		{
+			if (tempNormal.x != 0.0f)
+			{
+				if (lives == 0)
+				{
+					gameOver = true;
+					moving = false;
+					velocity = beginningVelocity;
+					return;
+				}
+				else
+				{
+					lives--;
+					moving = false;
+					velocity = beginningVelocity;
+					return;
+				}
+			}
+			else
+			{
+				velocity.x += deltaTime*paddleVelocityFactor*otherObj->getComponent<PlayerPaddleController>()->getVelocity().x;
+			}
 		}
 
 		if (velocity.x > moveSpeedX)

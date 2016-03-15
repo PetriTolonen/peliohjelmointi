@@ -33,7 +33,6 @@ GameRunningState::GameRunningState(GameApp* app) : GameState(app)
 
 GameRunningState::~GameRunningState()
 {
-	//std::cout << "GameRunnig state destructor" << std::endl;
 	delete componentFactory;
 }
 

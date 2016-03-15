@@ -31,6 +31,8 @@ private:
 	float maxSpeed;
 	float increment;
 	yam2d::GameObject* ball;
+
+	float slowFactor;
 };
 
 

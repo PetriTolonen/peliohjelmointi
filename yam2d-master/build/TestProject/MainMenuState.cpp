@@ -85,7 +85,6 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 	// Keyboard changes currentSelection up and down.
 	if (isKeyReleased(KEY_UP) || isKeyReleased(KEY_W))
 	{
-
 		if (currentSelection > 0)
 		{
 			currentSelection--;
@@ -140,7 +139,7 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 			esLogMessage("Object not picked!");
 		}
 	}
-	//currentSelection = 0;
+
 	// Keyboard return selectes currentSelection.
 	if (isKeyReleased(KEY_RETURN))
 	{
