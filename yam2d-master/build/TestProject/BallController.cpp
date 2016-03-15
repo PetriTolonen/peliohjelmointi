@@ -9,15 +9,15 @@ using namespace yam2d; // Use namespace yam3d implicitily.
 BallController::BallController(GameObject* owner)
 	: Component(owner, Component::getDefaultProperties()) // Initalize base class by giving parameres to it
 {
-	moveSpeedX = 3.5f; // tiles / second
-	moveSpeedY = 3.5f; // tiles / second
+	moveSpeedX = 7.5f; // tiles / second
+	moveSpeedY = 7.5f; // tiles / second
 	moving = false;
 	gameOver = false;
 	beginningVelocity = slm::vec2(moveSpeedX, -moveSpeedY);
 	velocity = beginningVelocity;
 	lives = 3;
 	removeFromInside = slm::vec2(0.0f);
-	overlapOffset = 0.05f;
+	overlapOffset = 5.0f;
 	dampingSpeed = 8.0f;
 	paddleVelocityFactor = 10.0f;
 	count = 0;
@@ -43,7 +43,7 @@ void BallController::update(float deltaTime)
 
 	if (moving)
 	{
-		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*(velocity +removeFromInside));
+		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*(velocity));
 	}
 
 	else if (!gameOver)
@@ -76,13 +76,12 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 	/*count++;
 	std::cout << "colliding " << count << std::endl;*/
 
+	removeFromInside = slm::vec2(0.0f);
+
 	if (moving)
 	{
 		slm::vec2 tempNormal = collisionNormal;
-		removeFromInside = slm::vec2(0.0f);
-
-		std::cout << tempNormal.x << " " << tempNormal.y << std::endl;
-		
+				
 		// First checking if hitting right or left side
 		if ((1 - abs(collisionNormal.x)) < (1- abs(collisionNormal.y)))
 		{
@@ -109,8 +108,8 @@ void BallController::HandleCollision(GameObject* otherObj, const slm::vec2& coll
 			}
 			tempNormal.x = 0.0f;
 		}
-		
-		std::cout << removeFromInside.x << "r" << removeFromInside.y << std::endl;
+
+		getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*(removeFromInside));
 
 		slm::vec3 temp = slm::vec3(velocity, 0.0f);
 		slm::vec3 temp2 = normalize(slm::vec3(tempNormal, 0.0f));

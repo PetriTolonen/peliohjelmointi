@@ -54,6 +54,7 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 		if (m_map->findGameObjectByName("Ball")->collidesTo(m_map->getLayer("StaticColliders")->getGameObjects()[i], &collisionNormal))
 		{
 			m_map->findGameObjectByName("Ball")->getComponent<BallController>()->HandleCollision(m_map->getLayer("StaticColliders")->getGameObjects()[i], collisionNormal, deltaTime);
+			break;
 		}
 	}
 
@@ -64,6 +65,7 @@ bool GameRunningState::update(ESContext* ctx, float deltaTime)
 		{
 			m_map->findGameObjectByName("Ball")->getComponent<BallController>()->HandleCollision(m_map->getLayer("Bricks")->getGameObjects()[i], collisionNormal, deltaTime);
 			m_map->deleteGameObject(m_map->getLayer("Bricks")->getGameObjects()[i]);
+			break;
 		}
 	}
 
