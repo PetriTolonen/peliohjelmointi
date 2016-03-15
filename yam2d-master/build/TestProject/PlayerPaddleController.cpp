@@ -47,13 +47,13 @@ void PlayerPaddleController::update(float deltaTime)
 			velocity.x -= deltaTime*9.0f;
 		if (velocity.x < 0.0f)
 			velocity.x += deltaTime*9.0f;
-		if (abs(velocity.x) < 0.1f)
+		if (abs(velocity.x) < 0.3f)
 		{
 			velocity.x = 0.0f;
 		}
 	}	
 
-	//getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*velocity);
-	getGameObject()->setPosition(ball->getPosition().x + deltaTime*velocity.x, 11.0f);
+	getGameObject()->setPosition(getGameObject()->getPosition() + deltaTime*velocity);
+	//getGameObject()->setPosition(ball->getPosition().x + deltaTime*velocity.x, 11.0f);
 }
 

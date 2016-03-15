@@ -140,9 +140,9 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 			esLogMessage("Object not picked!");
 		}
 	}
-	currentSelection = 0;
+	//currentSelection = 0;
 	// Keyboard return selectes currentSelection.
-	if (/*isKeyReleased(KEY_RETURN)*/1)
+	if (isKeyReleased(KEY_RETURN))
 	{
 		switch (currentSelection)
 		{

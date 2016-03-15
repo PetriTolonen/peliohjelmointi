@@ -9,8 +9,8 @@ using namespace yam2d; // Use namespace yam3d implicitily.
 BallController::BallController(GameObject* owner)
 	: Component(owner, Component::getDefaultProperties()) // Initalize base class by giving parameres to it
 {
-	moveSpeedX = 7.5f; // tiles / second
-	moveSpeedY = 7.5f; // tiles / second
+	moveSpeedX = 3.5f; // tiles / second
+	moveSpeedY = 3.5f; // tiles / second
 	moving = false;
 	gameOver = false;
 	beginningVelocity = slm::vec2(moveSpeedX, -moveSpeedY);
@@ -35,10 +35,10 @@ void BallController::update(float deltaTime)
 		// TODO 
 	}
 	
-	if (/*isKeyPressed(KEY_SPACE) && !moving*/1)
+	if (isKeyPressed(KEY_SPACE) && !moving)
 	{
 		moving = true;
-		//velocity.x = pad->getComponent<PlayerPaddleController>()->getVelocity().x;
+		velocity.x = pad->getComponent<PlayerPaddleController>()->getVelocity().x;
 	}
 
 	if (moving)
