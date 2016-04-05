@@ -1,11 +1,12 @@
 #pragma once
 #include "SearchNode.h"
+#include <vector>
 
 class OpenList
 {
 public:
-	OpenList(){}
-	~OpenList(){}
+	OpenList();
+	~OpenList();
 
 	SearchNode* findFromOpenList(const Position& pos);
 	void insertToOpenList(SearchNode* n);
@@ -15,5 +16,6 @@ public:
 	bool isEmpty();
 	void clear();
 private:
-
+	typedef std::vector<SearchNode*> OpenListType;
+	OpenListType openList;
 };

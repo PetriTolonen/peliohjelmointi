@@ -1,3 +1,2 @@
 Start finding path from input image: "input.png"
-Path find done. Time spent 1.046 seconds
-
+Error: Assertation failed at c:\users\petritol\desktop\peliohjelmointi\yam2d-master\build\pathfinding_template\pathfindingapp.cpp:151: 0

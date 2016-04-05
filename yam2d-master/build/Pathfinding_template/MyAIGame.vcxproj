@@ -83,8 +83,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClosedList.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenList.cpp" />
     <ClCompile Include="PathFindingApp.cpp" />
+    <ClCompile Include="SearchLevel.cpp" />
     <ClCompile Include="SearchNode.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +96,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClosedList.h" />
     <ClInclude Include="OpenList.h" />
     <ClInclude Include="PathFindingApp.h" />
     <ClInclude Include="SearchLevel.h" />

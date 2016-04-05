@@ -4,30 +4,35 @@
 #include <StreamTexture.h>
 #include <Text.h>
 
-namespace
-{
-	void setPathColor(yam2d::StreamTexture* t, int x, int y)
-	{
-		t->getPixel(x, y)[0] = 0xff;
-		t->getPixel(x, y)[1] = 0x00;
-		t->getPixel(x, y)[2] = 0xff;
-	}
+#include "OpenList.h"
+#include "ClosedList.h"
+#include "SearchLevel.h"
+#include "SearchNode.h"
 
-	bool isRed(unsigned char* p)
-	{
-		return p[0] > 200;
-	}
-
-	bool isGreen(unsigned char* p)
-	{
-		return p[1] > 200;
-	}
-
-	bool isBlue(unsigned char* p)
-	{
-		return p[2] > 200;
-	}
-}
+//namespace
+//{
+//	void setPathColor(yam2d::StreamTexture* t, int x, int y)
+//	{
+//		t->getPixel(x, y)[0] = 0xff;
+//		t->getPixel(x, y)[1] = 0x00;
+//		t->getPixel(x, y)[2] = 0xff;
+//	}
+//
+//	bool isRed(unsigned char* p)
+//	{
+//		return p[0] > 200;
+//	}
+//
+//	bool isGreen(unsigned char* p)
+//	{
+//		return p[1] > 200;
+//	}
+//
+//	bool isBlue(unsigned char* p)
+//	{
+//		return p[2] > 200;
+//	}
+//}
 
 PathFindingApp::PathFindingApp()
 : m_batch()
@@ -210,18 +215,74 @@ void PathFindingApp::render(yam2d::ESContext *ctx)
 
 bool PathFindingApp::doPathfinding(int startX, int startY, int endX, int endY)
 {
-	
 	// Set color for start and end pos to path color
 	setPathColor(m_texturePathFound, startX, startY);
 	setPathColor(m_texturePathFound, endX, endY);
 
-	// TODO: Add code here...
+	bool done = true;
+	OpenList openList;
+	ClosedList closedList;
+	SearchLevel searchlevel(m_textureStartCase);
+	SearchNode* result = 0;
 
+	Position startPosition = Position(startX, startY);
+	Position endPosition = Position(endX, endY);
+	SearchNode* newNode = new SearchNode(startPosition, searchlevel.GetH(startPosition, endPosition), 0, 0);
+	openList.insertToOpenList(newNode);
 
-	// TODO: Remove that search end and delay hack as seen below..
-	static int i = 0;
-	i = ((i+1)%10); // 10*100ms = ~500 ms of total
-	Sleep(100);
-	return i==0;
+	while (!openList.isEmpty())
+	{
+		SearchNode* prev = openList.removeSmallestFFromOpenList();
+		if (prev->pos == endPosition)
+		{
+			result = prev; break;
+		}
+		else
+		{
+			closedList.addToClosedList(prev);
+
+			std::vector<Position> adjacentNodes = searchlevel.getAdjacentNodes(prev->pos.first, prev->pos.second);
+			for (size_t i = 0; i < adjacentNodes.size(); i++)
+			{
+				if (closedList.isInClosedList(adjacentNodes[i]))
+				{
+					continue;
+				}
+
+				SearchNode* n = openList.findFromOpenList(adjacentNodes[i]);
+				if (n == 0)
+				{
+					SearchNode* newNode = new SearchNode(adjacentNodes[i],
+						searchlevel.GetH(adjacentNodes[i], endPosition),
+						searchlevel.GetG(prev, adjacentNodes[i]), prev);
+					openList.insertToOpenList(newNode);
+				}
+				else
+				{
+					SearchNode* newNode = new SearchNode(adjacentNodes[i],
+						searchlevel.GetH(adjacentNodes[i], endPosition),
+						searchlevel.GetG(prev, adjacentNodes[i]), prev);
+					if (n->getDistance() < newNode->getDistance())
+					{
+						n->resetPrev(newNode->prevNode, searchlevel.GetG(newNode->prevNode, n->pos));
+					}
+				}
+			}
+		}
+	}
+
+	if (result == 0)
+	{
+		printf("No can do");
+		return true;
+	}
+
+	while (result != 0)
+	{
+		setPathColor(m_texturePathFound, result->pos.first, result->pos.second);
+		result = result->prevNode;
+	}
+
+	return true;
 }
 
