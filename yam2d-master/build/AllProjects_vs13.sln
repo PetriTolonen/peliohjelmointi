@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProject", "TestProject"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestProject", "TestProject\TestProject.vcxproj", "{CE022D61-EAC5-482F-BB74-DC60DEC5B38A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyAIGame", "Pathfinding_template\MyAIGame.vcxproj", "{04B58DB6-6AE2-48F4-8285-FF8B8BB7EF86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -95,6 +97,10 @@ Global
 		{CE022D61-EAC5-482F-BB74-DC60DEC5B38A}.Debug|Win32.Build.0 = Debug|Win32
 		{CE022D61-EAC5-482F-BB74-DC60DEC5B38A}.Release|Win32.ActiveCfg = Release|Win32
 		{CE022D61-EAC5-482F-BB74-DC60DEC5B38A}.Release|Win32.Build.0 = Release|Win32
+		{04B58DB6-6AE2-48F4-8285-FF8B8BB7EF86}.Debug|Win32.ActiveCfg = Debug|Win32
+		{04B58DB6-6AE2-48F4-8285-FF8B8BB7EF86}.Debug|Win32.Build.0 = Debug|Win32
+		{04B58DB6-6AE2-48F4-8285-FF8B8BB7EF86}.Release|Win32.ActiveCfg = Release|Win32
+		{04B58DB6-6AE2-48F4-8285-FF8B8BB7EF86}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
