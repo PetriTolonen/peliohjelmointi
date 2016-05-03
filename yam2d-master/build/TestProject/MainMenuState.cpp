@@ -1,11 +1,17 @@
 #include "MainMenuState.h"
 
 #include "GameRunningState.h"
+#include "GameRunningState2.h"
 #include "GameApp.h"
 
 void MainMenuState::toRunningState()
 {
 	getApp()->setState(new GameRunningState(getApp()));
+}
+
+void MainMenuState::toRunningState2()
+{
+	getApp()->setState(new GameRunningState2(getApp()));
 }
 
 MainMenuState::MainMenuState(GameApp* app) : GameState(app)
@@ -33,7 +39,16 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	m_map->addLayer(Map::MAPLAYER0, objectLayer);
 
 	// Create new start game object
-	GameObject* start = createSpriteGameObject("assets/StartExit2.png", tileSize.x, tileSize.y,0,0,128,128);
+	GameObject* start2 = createSpriteGameObject("assets/StartExit2.png", tileSize.x, tileSize.y, 0, 0, 128, 128);
+
+	start2->setName("start2");
+	// Add start to level
+	objectLayer->addGameObject(start2);
+	// Set position
+	start2->setPosition(vec2(1.4f, -2.1f));
+
+	// Create new start game object
+	GameObject* start = createSpriteGameObject("assets/StartExit2.png", tileSize.x, tileSize.y, 0, 0, 128, 128);
 
 	start->setName("start");
 	// Add start to level
@@ -73,13 +88,17 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 	pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
 
 	// Changing currentSelection from mouse.
-	if (pickedObject && pickedObject->getName() == "start")
+	if (pickedObject && pickedObject->getName() == "start2")
 	{
 		currentSelection = 0;
 	}
-	else if (pickedObject && pickedObject->getName() == "exit")
+	if (pickedObject && pickedObject->getName() == "start")
 	{
 		currentSelection = 1;
+	}
+	else if (pickedObject && pickedObject->getName() == "exit")
+	{
+		currentSelection = 2;
 	}
 
 	// Keyboard changes currentSelection up and down.
@@ -96,7 +115,7 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 	if (isKeyReleased(KEY_DOWN)|| isKeyReleased(KEY_S))
 	{
 
-		if (currentSelection < 1)
+		if (currentSelection < 2)
 		{
 			currentSelection++;
 		}
@@ -116,6 +135,16 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 	// Mouse selection by pressing left mouse button.
 	if (isMouseButtonReleased(MOUSE_LEFT))
 	{
+		if (pickedObject && pickedObject->getName() == "start2")
+		{
+			esLogMessage("Object %s picked at position %2.2f,%2.2f!",
+				pickedObject->getName().c_str(),
+				pickedObject->getPosition().x,
+				pickedObject->getPosition().y, " (start2 selected with mouse)");
+
+			toRunningState2();
+			return true;
+		}
 		if (pickedObject && pickedObject->getName() == "start")
 		{
 			esLogMessage("Object %s picked at position %2.2f,%2.2f!",
@@ -147,10 +176,16 @@ bool MainMenuState::update(ESContext* ctx, float deltaTime)
 		{
 		case 0:
 		{
+			toRunningState2();
+			break;
+		}
+
+		case 1:
+		{
 			toRunningState();
 			break;
 		}
-		case 1:
+		case 2:
 		{
 			return false;
 		}		

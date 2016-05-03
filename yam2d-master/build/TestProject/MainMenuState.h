@@ -82,6 +82,7 @@ private:
 
 	Ref<GameObject> pickedObject;
 	void toRunningState();
+	void toRunningState2();
 
 	int currentSelection;
 };

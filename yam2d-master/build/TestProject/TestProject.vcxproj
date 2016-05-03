@@ -89,6 +89,7 @@
     <ClCompile Include="BallController.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameRunningState.cpp" />
+    <ClCompile Include="GameRunningState2.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="PlayerPaddleController.cpp" />
@@ -108,9 +109,11 @@
     <ClInclude Include="BallController.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameRunningState.h" />
+    <ClInclude Include="GameRunningState2.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MyComponentFactory.h" />
+    <ClInclude Include="MyComponentFactory2.h" />
     <ClInclude Include="PlayerPaddleController.h" />
     <ClInclude Include="SplashScreenState.h" />
   </ItemGroup>
