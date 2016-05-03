@@ -13,4 +13,8 @@ public:
 private:
 	Ref<TmxMap> m_map;
 	MyComponentFactory2* componentFactory2;
+	Ref<GameObject> pickedObject;
+
+	slm::vec2 oldPos;
+	slm::vec2 currentPos;
 };

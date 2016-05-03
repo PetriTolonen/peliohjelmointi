@@ -49,6 +49,7 @@ public:
 		{
 			esLogMessage("Wall created by MyComponentFactory2");
 			GameObject* gameObject = new GameObject(parent, properties);
+			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
 			return gameObject;
 		}
 		
@@ -56,6 +57,7 @@ public:
 		{
 			esLogMessage("studd created by MyComponentFactory2");
 			GameObject* gameObject = new GameObject(parent, properties);
+			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
 			return gameObject;
 		}
 

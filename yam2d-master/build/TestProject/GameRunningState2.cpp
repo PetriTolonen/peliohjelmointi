@@ -18,7 +18,7 @@ GameRunningState2::GameRunningState2(GameApp* app) : GameState(app)
 	componentFactory2->setCurrentMap(m_map);
 
 	esLogMessage("Init... %d", cc++);
-	m_map->loadMapFile("assets/level.tmx", componentFactory2);
+	m_map->loadMapFile("assets/level2.tmx", componentFactory2);
 
 	esLogMessage("Init... %d", cc++);
 	// Move camera to middle of map.
@@ -35,6 +35,32 @@ GameRunningState2::~GameRunningState2()
 bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 {
 	m_map->update(deltaTime);
+
+	// Mouse picks
+	float mouseX = float(getMouseAxisX());
+	float mouseY = float(getMouseAxisY());
+
+	vec2 mouseInMapCoordinates = m_map->screenToMapCoordinates(mouseX, mouseY);
+	
+	if (isMouseButtonReleased(MOUSE_LEFT))
+	{
+		if (pickedObject)
+		{
+			pickedObject->setPosition(oldPos);			
+		}
+		
+		pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
+
+		if (pickedObject->getName() == "studd")
+		{
+			oldPos = pickedObject->getPosition();
+		}
+	}
+
+	if (pickedObject)
+	{
+		pickedObject->setPosition(mouseInMapCoordinates);
+	}	
 
 	if (isKeyReleased(KEY_ESCAPE))
 	{
