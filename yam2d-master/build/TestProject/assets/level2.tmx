@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="64" tileheight="64" nextobjectid="300">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="64" tileheight="64" nextobjectid="316">
  <tileset firstgid="1" name="Objects" tilewidth="64" tileheight="64" tilecount="16" columns="4">
   <image source="objects.png" trans="ffffff" width="256" height="256"/>
  </tileset>
@@ -44,37 +44,37 @@
  </objectgroup>
  <objectgroup name="Objects">
   <object id="265" name="studd" type="studd" gid="1" x="576" y="256" width="64" height="64"/>
-  <object id="266" name="studd" type="studd" gid="1" x="576" y="320" width="64" height="64"/>
-  <object id="267" name="studd" type="studd" gid="1" x="640" y="256" width="64" height="64"/>
   <object id="268" name="studd" type="studd" gid="1" x="640" y="320" width="64" height="64"/>
   <object id="269" name="studd" type="studd" gid="1" x="704" y="256" width="64" height="64"/>
-  <object id="270" name="studd" type="studd" gid="1" x="704" y="320" width="64" height="64"/>
   <object id="271" name="studd" type="studd" gid="1" x="448" y="384" width="64" height="64"/>
-  <object id="272" name="studd" type="studd" gid="1" x="512" y="384" width="64" height="64"/>
   <object id="273" name="studd" type="studd" gid="1" x="576" y="384" width="64" height="64"/>
   <object id="274" name="studd" type="studd" gid="1" x="704" y="384" width="64" height="64"/>
-  <object id="275" name="studd" type="studd" gid="1" x="768" y="384" width="64" height="64"/>
   <object id="276" name="studd" type="studd" gid="1" x="832" y="384" width="64" height="64"/>
-  <object id="277" name="studd" type="studd" gid="1" x="448" y="448" width="64" height="64"/>
   <object id="278" name="studd" type="studd" gid="1" x="512" y="448" width="64" height="64"/>
-  <object id="279" name="studd" type="studd" gid="1" x="576" y="448" width="64" height="64"/>
-  <object id="280" name="studd" type="studd" gid="1" x="704" y="448" width="64" height="64"/>
   <object id="281" name="studd" type="studd" gid="1" x="768" y="448" width="64" height="64"/>
-  <object id="282" name="studd" type="studd" gid="1" x="832" y="448" width="64" height="64"/>
   <object id="283" name="studd" type="studd" gid="1" x="448" y="512" width="64" height="64"/>
-  <object id="284" name="studd" type="studd" gid="1" x="512" y="512" width="64" height="64"/>
   <object id="285" name="studd" type="studd" gid="1" x="576" y="512" width="64" height="64"/>
-  <object id="286" name="studd" type="studd" gid="1" x="640" y="512" width="64" height="64"/>
-  <object id="287" name="studd" type="studd" gid="1" x="640" y="384" width="64" height="64"/>
   <object id="288" name="studd" type="studd" gid="1" x="704" y="512" width="64" height="64"/>
-  <object id="289" name="studd" type="studd" gid="1" x="768" y="512" width="64" height="64"/>
   <object id="290" name="studd" type="studd" gid="1" x="832" y="512" width="64" height="64"/>
-  <object id="291" name="studd" type="studd" gid="1" x="576" y="576" width="64" height="64"/>
   <object id="292" name="studd" type="studd" gid="1" x="640" y="576" width="64" height="64"/>
-  <object id="293" name="studd" type="studd" gid="1" x="704" y="576" width="64" height="64"/>
   <object id="294" name="studd" type="studd" gid="1" x="576" y="640" width="64" height="64"/>
-  <object id="295" name="studd" type="studd" gid="1" x="640" y="640" width="64" height="64"/>
   <object id="296" name="studd" type="studd" gid="1" x="704" y="640" width="64" height="64"/>
   <object id="299" name="Empty" type="Empty" gid="7" x="640" y="448" width="64" height="64"/>
+  <object id="300" name="studd" type="studd" gid="8" x="640" y="256" width="64" height="64"/>
+  <object id="301" name="studd" type="studd" gid="8" x="576" y="320" width="64" height="64"/>
+  <object id="302" name="studd" type="studd" gid="8" x="704" y="320" width="64" height="64"/>
+  <object id="303" name="studd" type="studd" gid="8" x="512" y="384" width="64" height="64"/>
+  <object id="304" name="studd" type="studd" gid="8" x="640" y="384" width="64" height="64"/>
+  <object id="305" name="studd" type="studd" gid="8" x="768" y="384" width="64" height="64"/>
+  <object id="306" name="studd" type="studd" gid="8" x="448" y="448" width="64" height="64"/>
+  <object id="307" name="studd" type="studd" gid="8" x="576" y="448" width="64" height="64"/>
+  <object id="308" name="studd" type="studd" gid="8" x="704" y="448" width="64" height="64"/>
+  <object id="309" name="studd" type="studd" gid="8" x="832" y="448" width="64" height="64"/>
+  <object id="310" name="studd" type="studd" gid="8" x="512" y="512" width="64" height="64"/>
+  <object id="311" name="studd" type="studd" gid="8" x="640" y="512" width="64" height="64"/>
+  <object id="312" name="studd" type="studd" gid="8" x="768" y="512" width="64" height="64"/>
+  <object id="313" name="studd" type="studd" gid="8" x="576" y="576" width="64" height="64"/>
+  <object id="314" name="studd" type="studd" gid="8" x="704" y="576" width="64" height="64"/>
+  <object id="315" name="studd" type="studd" gid="8" x="640" y="640" width="64" height="64"/>
  </objectgroup>
 </map>
