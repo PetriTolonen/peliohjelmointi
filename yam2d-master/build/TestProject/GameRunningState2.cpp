@@ -74,7 +74,7 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 			{
 				slm::vec2 m_slope = slope(pickedObject->getPosition(), tryPickEmpty->getPosition());
 
-				if (m_slope.x == 0.0f || m_slope.y == 0.0f)
+				if (m_slope.x < 0.001f || m_slope.y < 0.001f)
 				{
 					if (abs(lenght(m_slope) - 2) < 0.05f)
 					{
