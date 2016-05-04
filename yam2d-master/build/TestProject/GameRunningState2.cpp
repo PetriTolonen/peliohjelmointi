@@ -3,7 +3,7 @@
 #include "MainMenuState.h"
 #include <iostream>
 
-GameRunningState2::GameRunningState2(GameApp* app) : GameState(app)
+GameRunningState2::GameRunningState2(GameApp* app) : GameState(app), amoutOfPegs(0)
 {
 	esLogMessage(__FUNCTION__);
 	int cc = 0;
@@ -20,9 +20,32 @@ GameRunningState2::GameRunningState2(GameApp* app) : GameState(app)
 	esLogMessage("Init... %d", cc++);
 	m_map->loadMapFile("assets/level2.tmx", componentFactory2);
 
+	amoutOfPegs = m_map->getLayer("Objects")->getGameObjects().size() - 1;
+
 	esLogMessage("Init... %d", cc++);
 	// Move camera to middle of map.
 	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 1.0f, m_map->getHeight() / 2.0f - 0.5f));
+
+	esLogMessage("Init... %d", cc++);
+	// Load font texture. Made with font creation tool like bitmap font builder.
+	fontTexture = new Texture("assets/Fixedsys_24_Bold.png");
+
+	esLogMessage("Init... %d", cc++);
+	// Create font clip areas (sprite sheet), from dat file and texture. Dat-file is made with bitmap font builder.
+	font = SpriteSheet::autoFindFontFromTexture(fontTexture, "assets/Fixedsys_24_Bold.dat");
+
+	esLogMessage("Init... %d", cc++);
+	// Create new text-object
+	text = new Text(0, font);
+
+	esLogMessage("Init... %d", cc++);
+	// Text color
+	text->setColor(1.0f, 0.5, 0.5f);
+	text->setDepth(1.0f);
+
+	esLogMessage("Init... %d", cc++);
+	// Create new sprite batch group. This must be deleted at deinit.
+	batch = new SpriteBatchGroup();
 
 	esLogMessage("Init... Done");
 }
@@ -90,6 +113,13 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 		return true;
 	}
 
+	batch->clear();
+	// Set text.
+	text->setText("Amount Of Pegs Left = " + amoutOfPegs);
+
+	// Add text to position
+	batch->addText(fontTexture, text, vec2(0.0f, 0.0f), 0);
+
 	return true;
 }
 
@@ -100,4 +130,5 @@ void GameRunningState2::draw(ESContext* ctx)
 
 	// Render map and all of its layers containing GameObjects to screen.
 	m_map->render();
+	batch->render();
 }

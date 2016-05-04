@@ -35,9 +35,16 @@ private:
 		GameObject* gameObject = new GameObject(0, 0);
 
 		// Resize the sprite to be correct size
-		gameObject->setSize(64.0f, 64.0f);
+		gameObject->setSize(128.0f, 128.0f);
 		gameObject->setPosition(pos);
 		gameObject->setName("Empty");
 		m_map->getLayer("Objects")->addGameObject(gameObject);
 	}
+
+	int amoutOfPegs;
+
+	Ref<SpriteSheet> font;
+	Ref<Texture> fontTexture;
+	Ref<Text> text;
+	Ref<SpriteBatchGroup> batch;
 };
