@@ -69,6 +69,14 @@ public:
 			return gameObject;
 		}
 
+		else if ("donutPick" == type)
+		{
+			esLogMessage("DonutPick created by MyComponentFactory2");
+			GameObject* gameObject = new GameObject(parent, properties);
+			gameObject->addComponent(componentFactory->createNewComponent("Tile", gameObject, properties));
+			return gameObject;
+		}
+
 		// Default functionality.
 		Entity* res = DefaultComponentFactory::createNewEntity(componentFactory, type, parent, properties);
 		assert(res != 0);

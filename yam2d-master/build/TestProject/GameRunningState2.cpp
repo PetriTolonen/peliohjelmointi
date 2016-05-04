@@ -46,9 +46,10 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 	{
 		if (pickedObject)
 		{
-			if (m_map->getLayer("Objects")->pick(mouseInMapCoordinates)->getName() == "Empty")
+			GameObject* tryPickEmpty = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
+			if (tryPickEmpty && tryPickEmpty->getName() == "Empty")
 			{
-				slm::vec2 m_slope = slope(pickedObject->getPosition(), m_map->getLayer("Objects")->pick(mouseInMapCoordinates)->getPosition());
+				slm::vec2 m_slope = slope(pickedObject->getPosition(), tryPickEmpty->getPosition());
 
 				if (m_slope.x == 0.0f || m_slope.y == 0.0f)
 				{
@@ -56,13 +57,15 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 					{
 						slm::vec2 norm = slm::normalize(m_slope);
 
-						if (m_map->getLayer("Objects")->pick(pickedObject->getPosition() + norm)->getName() == "studd")
+						GameObject* tryPickBetween = m_map->getLayer("Objects")->pick(pickedObject->getPosition() + norm);
+						if (tryPickBetween->getName() == "studd")
 						{
-							m_map->deleteGameObject(m_map->getLayer("Objects")->pick(pickedObject->getPosition() + norm)); // remove studd between
-							addEmpty(pickedObject->getPosition() + norm); // add empty to removed studd position
-							m_map->deleteGameObject(m_map->getLayer("Objects")->pick(mouseInMapCoordinates)); //remove empty
-							addEmpty(pickedObject->getPosition()); // add empty to removed studd position
-							pickedObject->setPosition(m_map->getLayer("Objects")->pick(mouseInMapCoordinates)->getPosition()); // set picked studd to new position
+							addEmpty(tryPickBetween->getPosition()); // add empty to removed studd position
+							m_map->deleteGameObject(tryPickBetween); // remove studd between
+							
+							addEmpty(pickedObject->getPosition()); // add empty to removed studd old position
+							pickedObject->setPosition(tryPickEmpty->getPosition()); // set picked studd to new position
+							m_map->deleteGameObject(tryPickEmpty); // remove empty where pickedObject went
 						}
 					}
 				}
@@ -73,13 +76,10 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 			}						
 		}
 		
-		if (m_map->getLayer("Objects")->pick(mouseInMapCoordinates)->getName() != "Empty")
+		GameObject* tryPick = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
+		if (tryPick && tryPick->getName() == "studd")
 		{
-			pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
-		}
-
-		if (pickedObject->getName() == "studd")
-		{
+			pickedObject = tryPick;
 			pickedObject->setRotation(0.20f);
 		}
 	}
