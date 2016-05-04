@@ -46,21 +46,43 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 	{
 		if (pickedObject)
 		{
-			pickedObject->setPosition(oldPos);			
+			if (m_map->getLayer("Objects")->pick(mouseInMapCoordinates)->getName() == "Empty")
+			{
+				slm::vec2 m_slope = slope(pickedObject->getPosition(), m_map->getLayer("Objects")->pick(mouseInMapCoordinates)->getPosition());
+
+				if (m_slope.x == 0.0f || m_slope.y == 0.0f)
+				{
+					if (abs(lenght(m_slope) - 2) < 0.05f)
+					{
+						slm::vec2 norm = slm::normalize(m_slope);
+
+						if (m_map->getLayer("Objects")->pick(pickedObject->getPosition() + norm)->getName() == "studd")
+						{
+							m_map->deleteGameObject(m_map->getLayer("Objects")->pick(pickedObject->getPosition() + norm)); // remove studd between
+							addEmpty(pickedObject->getPosition() + norm); // add empty to removed studd position
+							m_map->deleteGameObject(m_map->getLayer("Objects")->pick(mouseInMapCoordinates)); //remove empty
+							addEmpty(pickedObject->getPosition()); // add empty to removed studd position
+							pickedObject->setPosition(m_map->getLayer("Objects")->pick(mouseInMapCoordinates)->getPosition()); // set picked studd to new position
+						}
+					}
+				}
+			}
+			else
+			{
+				pickedObject->setRotation(0.0f);
+			}						
 		}
 		
-		pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
+		if (m_map->getLayer("Objects")->pick(mouseInMapCoordinates)->getName() != "Empty")
+		{
+			pickedObject = m_map->getLayer("Objects")->pick(mouseInMapCoordinates);
+		}
 
 		if (pickedObject->getName() == "studd")
 		{
-			oldPos = pickedObject->getPosition();
+			pickedObject->setRotation(0.20f);
 		}
 	}
-
-	if (pickedObject)
-	{
-		pickedObject->setPosition(mouseInMapCoordinates);
-	}	
 
 	if (isKeyReleased(KEY_ESCAPE))
 	{

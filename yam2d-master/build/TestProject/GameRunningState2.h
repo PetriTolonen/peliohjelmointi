@@ -2,6 +2,8 @@
 
 #include "GameState.h"
 #include "MyComponentFactory2.h"
+#include "Tileset.h"
+#include "TileComponent.h"
 
 class GameRunningState2 : public GameState
 {
@@ -17,4 +19,25 @@ private:
 
 	slm::vec2 oldPos;
 	slm::vec2 currentPos;
+
+	slm::vec2 slope(slm::vec2 pos, slm::vec2 pos2)
+	{
+		return slm::vec2(pos2.x - pos.x, pos2.y - pos.y);
+	}
+
+	float lenght(slm::vec2 slope)
+	{
+		return sqrt(pow(slope.x, 2) + pow(slope.y, 2));
+	}
+
+	void addEmpty(slm::vec2 pos)
+	{
+		GameObject* gameObject = new GameObject(0, 0);
+
+		// Resize the sprite to be correct size
+		gameObject->setSize(64.0f, 64.0f);
+		gameObject->setPosition(pos);
+		gameObject->setName("Empty");
+		m_map->getLayer("Objects")->addGameObject(gameObject);
+	}
 };
