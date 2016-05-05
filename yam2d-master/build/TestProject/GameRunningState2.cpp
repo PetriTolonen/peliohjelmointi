@@ -3,7 +3,7 @@
 #include "MainMenuState.h"
 #include <iostream>
 
-GameRunningState2::GameRunningState2(GameApp* app) : GameState(app), amoutOfPegs(0)
+GameRunningState2::GameRunningState2(GameApp* app) : GameState(app), amoutOfPegs(0), victoryState(false)
 {
 	esLogMessage(__FUNCTION__);
 	int cc = 0;
@@ -28,24 +28,6 @@ GameRunningState2::GameRunningState2(GameApp* app) : GameState(app), amoutOfPegs
 
 	esLogMessage("Init... %d", cc++);
 	// Load font texture. Made with font creation tool like bitmap font builder.
-	fontTexture = new Texture("assets/Fixedsys_24_Bold.png");
-
-	esLogMessage("Init... %d", cc++);
-	// Create font clip areas (sprite sheet), from dat file and texture. Dat-file is made with bitmap font builder.
-	font = SpriteSheet::autoFindFontFromTexture(fontTexture, "assets/Fixedsys_24_Bold.dat");
-
-	esLogMessage("Init... %d", cc++);
-	// Create new text-object
-	text = new Text(0, font);
-
-	esLogMessage("Init... %d", cc++);
-	// Text color
-	text->setColor(1.0f, 0.5, 0.5f);
-	text->setDepth(1.0f);
-
-	esLogMessage("Init... %d", cc++);
-	// Create new sprite batch group. This must be deleted at deinit.
-	batch = new SpriteBatchGroup();
 
 	esLogMessage("Init... Done");
 }
@@ -89,6 +71,8 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 							addEmpty(pickedObject->getPosition()); // add empty to removed studd old position
 							pickedObject->setPosition(tryPickEmpty->getPosition()); // set picked studd to new position
 							m_map->deleteGameObject(tryPickEmpty); // remove empty where pickedObject went
+
+							amoutOfPegs--;
 						}
 					}
 				}
@@ -113,12 +97,13 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 		return true;
 	}
 
-	batch->clear();
-	// Set text.
-	text->setText("Amount Of Pegs Left = " + amoutOfPegs);
+	if (victoryState == false && amoutOfPegs == 1)
+	{
+		addVoitit(slm::vec2((ctx->width / m_map->getTileHeight()) / 2.0f, (ctx->height / m_map->getTileHeight()) / 2.0f));
+		victoryState = true;
+	}
 
-	// Add text to position
-	batch->addText(fontTexture, text, vec2(0.0f, 0.0f), 0);
+	std::cout << amoutOfPegs << std::endl;
 
 	return true;
 }
@@ -130,5 +115,4 @@ void GameRunningState2::draw(ESContext* ctx)
 
 	// Render map and all of its layers containing GameObjects to screen.
 	m_map->render();
-	batch->render();
 }

@@ -4,6 +4,7 @@
 #include "MyComponentFactory2.h"
 #include "Tileset.h"
 #include "TileComponent.h"
+#include "SpriteComponent.h"
 
 class GameRunningState2 : public GameState
 {
@@ -35,16 +36,28 @@ private:
 		GameObject* gameObject = new GameObject(0, 0);
 
 		// Resize the sprite to be correct size
-		gameObject->setSize(64.0f, 64.0f);
+		int tileSizeX = m_map->getTileWidth();
+		int tileSizeY = m_map->getTileWidth();
+		gameObject->setSize(tileSizeX, tileSizeY);
 		gameObject->setPosition(pos);
 		gameObject->setName("Empty");
 		m_map->getLayer("Objects")->addGameObject(gameObject);
 	}
 
+	void addVoitit(slm::vec2 pos)
+	{
+		GameObject* gameObject = new GameObject(0, 0);
+
+		// Resize the sprite to be correct size
+		gameObject->setSize(256.0f, 256.0f);
+		gameObject->setPosition(pos);
+		gameObject->setName("Voitto");
+		Texture* texture = new Texture("assets/Voitit.png");
+		gameObject->addComponent(new SpriteComponent(gameObject, texture));
+		m_map->getLayer("Objects")->addGameObject(gameObject);
+	}
+
 	int amoutOfPegs;
 
-	Ref<SpriteSheet> font;
-	Ref<Texture> fontTexture;
-	Ref<Text> text;
-	Ref<SpriteBatchGroup> batch;
+	bool victoryState;
 };
