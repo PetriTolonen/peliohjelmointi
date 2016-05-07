@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameState.h"
+#include <TextComponent.h>
 
 using namespace yam2d;
 
@@ -78,11 +79,26 @@ private:
 	Ref<Texture> startTexture;
 	Ref<Texture> exitTexture;
 
-	Ref<SpriteBatchGroup> batch;
-
 	Ref<GameObject> pickedObject;
 	void toRunningState();
 	void toRunningState2();
 
 	int currentSelection;
+
+	GameObject* createTextGameObject(const std::string& t)
+	{
+		// Load font texture. Made with font creation tool like bitmap font builder.
+		Texture* fontTexture = new Texture("assets/Fixedsys_24_Bold.png");
+
+		// Create font clip areas (sprite sheet), from dat file and texture. Dat-file is made with bitmap font builder.
+		SpriteSheet* font = SpriteSheet::autoFindFontFromTexture(fontTexture, "assets/Fixedsys_24_Bold.dat");
+
+		GameObject* gameObject = new GameObject(0, 0);
+		TextComponent* textComponent = new TextComponent(gameObject, font);
+		gameObject->addComponent(textComponent);
+		textComponent->getText()->setText(t);
+		textComponent->getText()->setColor(0.0f, 1.0f, 0.5f);
+
+		return gameObject;
+	}
 };

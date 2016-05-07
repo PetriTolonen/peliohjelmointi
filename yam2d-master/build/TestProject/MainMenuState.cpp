@@ -66,8 +66,19 @@ MainMenuState::MainMenuState(GameApp* app) : GameState(app)
 	exit->setPosition(vec2(1.4f, 0.7f));
 
 	currentSelection = 0;
+
 	m_map->getLayer("Objects")->getGameObjects()[currentSelection]->getComponent<SpriteComponent>()->getSprite()->setColor(0.0f, 1.0f, 0.4f);
 
+	Layer* textLayer = new Layer(m_map, "Texts", 1.0f, true, false);
+	m_map->addLayer(Map::MAPLAYER1, textLayer);
+
+	GameObject* text1 = createTextGameObject("Peg Solitaire, 2 maps");
+	text1->setPosition(slm::vec2(start2->getPosition().x - 1.9f, start2->getPosition().y));
+	textLayer->addGameObject(text1);
+
+	GameObject* text2 = createTextGameObject("Arkanoid");
+	text2->setPosition(slm::vec2(start->getPosition().x - 1, start->getPosition().y));
+	textLayer->addGameObject(text2);
 
 	esLogMessage("Init... Done");
 }

@@ -77,4 +77,5 @@
   <object id="314" name="studd" type="studd" gid="8" x="704" y="576" width="64" height="64"/>
   <object id="315" name="studd" type="studd" gid="8" x="640" y="640" width="64" height="64"/>
  </objectgroup>
+ <objectgroup name="UpperLayer"/>
 </map>

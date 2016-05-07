@@ -26,8 +26,18 @@ GameRunningState2::GameRunningState2(GameApp* app) : GameState(app), amoutOfPegs
 	// Move camera to middle of map.
 	m_map->getCamera()->setPosition(vec2(m_map->getWidth() / 2.0f - 1.0f, m_map->getHeight() / 2.0f - 0.5f));
 
-	esLogMessage("Init... %d", cc++);
-	// Load font texture. Made with font creation tool like bitmap font builder.
+	esLogMessage("Init... %d", cc++);	
+
+	// Selection animation
+	texture = new Texture("assets/selection_animation.png");
+	spriteSheet = SpriteSheet::generateSpriteSheet(texture,128,128,0,0);
+	esLogMessage("Found %d sprite clips", spriteSheet->getClipCount());
+
+	// Peg amount text
+	GameObject* text1 = createTextGameObject("Pegs left to next map: " + std::to_string(amoutOfPegs-1));
+	text1->setPosition(slm::vec2(3.0f, 1.0f));
+	text1->setName("Text");
+	m_map->getLayer("UpperLayer")->addGameObject(text1);
 
 	esLogMessage("Init... Done");
 }
@@ -76,10 +86,6 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 						}
 					}
 				}
-			}
-			else
-			{
-				pickedObject->setRotation(0.0f);
 			}						
 		}
 		
@@ -87,8 +93,13 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 		if (tryPick && tryPick->getName() == "studd")
 		{
 			pickedObject = tryPick;
-			pickedObject->setRotation(0.20f);
+			if (selection == 0)
+			{
+				addSelectionAnimation(tryPick->getPosition());
+			}			
 		}
+
+		selection->setPosition(pickedObject->getPosition());
 	}
 
 	if (isKeyReleased(KEY_ESCAPE))
@@ -97,13 +108,14 @@ bool GameRunningState2::update(ESContext* ctx, float deltaTime)
 		return true;
 	}
 
-	if (victoryState == false && amoutOfPegs == 1)
-	{
-		addVoitit(slm::vec2((ctx->width / m_map->getTileHeight()) / 2.0f, (ctx->height / m_map->getTileHeight()) / 2.0f));
-		victoryState = true;
-	}
+	m_map->findGameObjectByName("Text")->getComponent<TextComponent>()->getText()->setText("Pegs left to next map: " + std::to_string(amoutOfPegs - 1));
 
-	std::cout << amoutOfPegs << std::endl;
+	if (victoryState == false && amoutOfPegs == 1)
+	{		
+		//addVoitit(slm::vec2((ctx->width / m_map->getTileHeight()) / 2.0f - 0.5f, (ctx->height / m_map->getTileHeight()) / 2.0f + 0.5f));
+		victoryState = true;
+		toNextMap();
+	}
 
 	return true;
 }

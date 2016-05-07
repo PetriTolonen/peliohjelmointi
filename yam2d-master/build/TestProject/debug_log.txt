@@ -82,6 +82,7 @@ studd created by MyComponentFactory2
 studd created by MyComponentFactory2
 Init... 4
 Init... 5
+Found 4 sprite clips
 Init... Done
 MainMenuState::MainMenuState
 Init... Done
