@@ -113,7 +113,7 @@ bool GameRunningState3::update(ESContext* ctx, float deltaTime)
 
 	if (victoryState == false && amoutOfPegs == 1)
 	{
-		addVoitit(slm::vec2((ctx->width / m_map->getTileHeight()) / 2.0f - 0.5f, (ctx->height / m_map->getTileHeight()) / 2.0f + 0.5f));
+		addVoitit(slm::vec2((ctx->width / m_map->getTileHeight()) / 2.0f - 1.5f, (ctx->height / m_map->getTileHeight()) / 2.0f + 0.5f));
 		victoryState = true;
 	}
 
